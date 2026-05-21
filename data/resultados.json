@@ -2,5 +2,14 @@
   "_instrucoes": "Preencha os campos 'gols_casa' e 'gols_fora' com o resultado ao fim do tempo regulamentar + prorrogação. Para jogos da fase de mata-mata que foram a pênaltis, preencha também 'penaltis_vencedor'. Deixe null enquanto o jogo não aconteceu.",
   "_anfitriao_melhor_campanha": null,
   "_nota_anfitriao": "Preencha com 'Estados Unidos', 'Canadá' ou 'México' ao fim da fase de grupos para ativar a duplicação correta.",
-  "resultados": {}
+  "resultados": {
+    "1": {"gols_casa": 2, "gols_fora": 1},
+    "2": {"gols_casa": 1, "gols_fora": 0},
+    "3": {"gols_casa": 1, "gols_fora": 0},
+    "4": {"gols_casa": 2, "gols_fora": 0},
+    "5": {"gols_casa": 1, "gols_fora": 2},
+    "6": {"gols_casa": 0, "gols_fora": 3},
+    "7": {"gols_casa": 2, "gols_fora": 1},
+    "8": {"gols_casa": 0, "gols_fora": 2}
+  }
 }
