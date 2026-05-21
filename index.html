@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolão Pistolando™ NAFTA 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #00c853;
+    --amarelo: #ffd600;
+    --azul: #0d47a1;
+    --laranja: #ff6d00;
+    --vermelho: #d50000;
+    --bg: #0a0a0a;
+    --card: #141414;
+    --border: #222;
+    --text: #f0f0f0;
+    --muted: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0a2463 0%, #0d1b2a 60%, #0a0a0a 100%);
+    border-bottom: 3px solid var(--amarelo);
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--amarelo);
+    letter-spacing: 0.05em;
+  }
+
+  .logo-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  nav a {
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+
+  nav a:hover, nav a.active {
+    border-color: var(--amarelo);
+    color: var(--amarelo);
+    background: rgba(255,214,0,0.06);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* RANKING TABLE */
+  .ranking-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  thead th {
+    background: #111;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: #181818; }
+
+  tbody td {
+    padding: 0.9rem 1rem;
+    white-space: nowrap;
+  }
+
+  .pos { color: var(--muted); width: 3rem; }
+  .pos-1 { color: #FFD700; font-weight: 700; }
+  .pos-2 { color: #C0C0C0; font-weight: 700; }
+  .pos-3 { color: #CD7F32; font-weight: 700; }
+
+  .nome-cell { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; }
+
+  .pts-cell {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--verde);
+    text-align: right;
+  }
+
+  .pts-cell.negative { color: var(--vermelho); }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    border-radius: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+  }
+
+  .badge-cravada { background: rgba(0,200,83,0.15); color: var(--verde); border: 1px solid rgba(0,200,83,0.3); }
+  .badge-invertida { background: rgba(213,0,0,0.15); color: var(--vermelho); border: 1px solid rgba(213,0,0,0.3); }
+
+  /* PRÓXIMOS JOGOS */
+  .jogos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .jogo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .jogo-card.duplicado::before {
+    content: '2×';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--amarelo);
+  }
+
+  .jogo-card.pot-duplicado::before {
+    content: '2×?';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--laranja);
+    opacity: 0.8;
+  }
+
+  .jogo-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .jogo-times {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .jogo-vs {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .jogo-resultado {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: var(--amarelo);
+    margin-top: 0.25rem;
+  }
+
+  .jogo-sede {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* LOADER */
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    gap: 1rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .spinner {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--amarelo);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-box {
+    background: rgba(213,0,0,0.1);
+    border: 1px solid rgba(213,0,0,0.3);
+    padding: 1.5rem;
+    color: #ff6b6b;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .tag-duplo { color: var(--amarelo); font-weight: 700; }
+  .tag-pot   { color: var(--laranja); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    header { padding: 1rem; }
+    main { padding: 1rem; }
+    .logo-title { font-size: 1.6rem; }
+    .pts-cell { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-title">⚽ Bolão Pistolando™</span>
+      <span class="logo-sub">NAFTA Edition 2026 · Soccer Fofo</span>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Ranking</a>
+      <a href="jogos.html">Jogos</a>
+      <a href="palpitar.html">Palpitar</a>
+      <a href="regulamento.html">Regulamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div id="app">
+    <div class="loader">
+      <div class="spinner"></div>
+      Carregando ranking...
+    </div>
+  </div>
+</main>
+
+<footer>
+  Bolão Pistolando™ NAFTA Edition 2026 · Dados atualizados ao vivo do repositório
+</footer>
+
+<script src="engine.js"></script>
+<script>
+async function render() {
+  const app = document.getElementById('app');
+  try {
+    const { ranking, jogos, resultados, anfitriaoBest } = await window.BolaoEngine.calcularRanking();
+
+    // Próximos jogos (sem resultado, ordenados por data)
+    const agora = Date.now();
+    const proximos = jogos
+      .filter(j => {
+        const r = resultados[String(j.id)];
+        return !r || (r.gols_casa === null || r.gols_casa === undefined);
+      })
+      .filter(j => new Date(j.data).getTime() > agora - 7200000) // até 2h atrás
+      .sort((a, b) => new Date(a.data) - new Date(b.data))
+      .slice(0, 8);
+
+    // Últimos resultados
+    const ultimosIds = Object.keys(resultados)
+      .filter(id => {
+        const r = resultados[id];
+        return r && r.gols_casa !== null && r.gols_casa !== undefined;
+      })
+      .map(Number)
+      .sort((a, b) => {
+        const ja = jogos.find(j => j.id === a);
+        const jb = jogos.find(j => j.id === b);
+        return new Date(jb?.data) - new Date(ja?.data);
+      })
+      .slice(0, 6);
+
+    let html = '';
+
+    // --- RANKING ---
+    html += `<h2 class="section-title">🏆 Classificação</h2>`;
+
+    if (ranking.length === 0) {
+      html += `<div class="error-box">Nenhum palpite encontrado. Adicione arquivos em data/palpites/ e atualize o index.json.</div>`;
+    } else {
+      html += `<div class="ranking-wrap"><table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Participante</th>
+            <th style="text-align:right">Pontos</th>
+            <th>⭐ Cravadas</th>
+            <th>✓ Vencedor</th>
+            <th>½ Gols</th>
+            <th>💀 Invertidas</th>
+            <th>Bônus</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      ranking.forEach((p, i) => {
+        const pos = i + 1;
+        const posClass = pos <= 3 ? `pos-${pos}` : '';
+        const ptsClass = p.pts < 0 ? 'negative' : '';
+        html += `<tr>
+          <td class="pos ${posClass}">${pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : pos}</td>
+          <td class="nome-cell">${p.nome}</td>
+          <td class="pts-cell ${ptsClass}">${p.pts.toFixed(1)}</td>
+          <td><span class="badge badge-cravada">${p.cravadas}</span></td>
+          <td>${p.acertosVencedor}</td>
+          <td>${p.acertosGols}</td>
+          <td>${p.invertidas > 0 ? `<span class="badge badge-invertida">${p.invertidas}</span>` : '—'}</td>
+          <td>${p.ptsExtras > 0 ? `+${p.ptsExtras}` : '—'}</td>
+        </tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+    }
+
+    // --- ÚLTIMOS RESULTADOS ---
+    if (ultimosIds.length > 0) {
+      html += `<h2 class="section-title" style="margin-top:3rem">📋 Últimos Resultados</h2>`;
+      html += `<div class="jogos-grid">`;
+      ultimosIds.forEach(id => {
+        const jogo = jogos.find(j => j.id === id);
+        const res = resultados[String(id)];
+        if (!jogo || !res) return;
+        const dupClass = jogo.duplicado ? 'duplicado' : '';
+        const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+        html += `<div class="jogo-card ${dupClass}">
+          <div class="jogo-meta">Grupo ${jogo.grupo || jogo.fase.toUpperCase()} · ${dataFmt}</div>
+          <div class="jogo-times">
+            <span>${jogo.casa}</span>
+            <span class="jogo-vs">×</span>
+            <span>${jogo.fora}</span>
+          </div>
+          <div class="jogo-resultado">${res.gols_casa} – ${res.gols_fora}${res.penaltis_vencedor ? ' <small style="font-size:0.9rem;color:var(--muted)">(pen: '+res.penaltis_vencedor+')</small>' : ''}</div>
+          <div class="jogo-sede">📍 ${jogo.sede}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // --- PRÓXIMOS JOGOS ---
+    if (proximos.length > 0) {
+      html += `<h2 class="section-title">🗓️ Próximos Jogos</h2>`;
+      html += `<p style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:1rem;">
+        <span class="tag-duplo">2×</span> = Pontuação dupla &nbsp;&nbsp; <span class="tag-pot">2×?</span> = Potencialmente duplo (anfitrião)
+      </p>`;
+      html += `<div class="jogos-grid">`;
+      proximos.forEach(jogo => {
+        const anfClass = ['Estados Unidos','Canadá','México'].includes(jogo.casa) || ['Estados Unidos','Canadá','México'].includes(jogo.fora) ? 'pot-duplicado' : '';
+        const dupClass = jogo.duplicado ? 'duplicado' : anfClass;
+        const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', { weekday:'short', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+        html += `<div class="jogo-card ${dupClass}">
+          <div class="jogo-meta">${jogo.grupo ? 'Grupo '+jogo.grupo : jogo.fase} · ${dataFmt}</div>
+          <div class="jogo-times">
+            <span>${jogo.casa}</span>
+            <span class="jogo-vs">×</span>
+            <span>${jogo.fora}</span>
+          </div>
+          <div class="jogo-sede">📍 ${jogo.sede}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    app.innerHTML = html;
+
+  } catch (err) {
+    app.innerHTML = `<div class="error-box">
+      <strong>Erro ao carregar dados</strong><br><br>
+      ${err.message}<br><br>
+      Verifique se o REPO_RAW em engine.js está configurado corretamente com seu usuário e repositório do GitHub.
+    </div>`;
+  }
+}
+
+render();
+</script>
+</body>
+</html>

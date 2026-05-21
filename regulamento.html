@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulamento · Bolão Pistolando™ NAFTA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --verde:#00c853;--amarelo:#ffd600;--laranja:#ff6d00;--vermelho:#d50000;--bg:#0a0a0a;--card:#141414;--border:#222;--text:#f0f0f0;--muted:#666; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;}
+  header{background:linear-gradient(135deg,#0a2463 0%,#0d1b2a 60%,#0a0a0a 100%);border-bottom:3px solid var(--amarelo);padding:1.5rem 2rem;position:sticky;top:0;z-index:100;}
+  .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+  .logo-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--amarelo);letter-spacing:.05em;}
+  .logo-sub{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;display:block;}
+  nav{display:flex;gap:.5rem;flex-wrap:wrap;}
+  nav a{text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);color:var(--muted);transition:all .15s;}
+  nav a:hover,nav a.active{border-color:var(--amarelo);color:var(--amarelo);background:rgba(255,214,0,.06);}
+  main{max-width:900px;margin:0 auto;padding:2rem;}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.05em;color:var(--text);margin:2rem 0 1rem;display:flex;align-items:center;gap:.75rem;}
+  .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+  .section-title:first-child{margin-top:0;}
+  p{line-height:1.7;margin-bottom:.75rem;font-size:.9rem;}
+  .tabela-pts{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:.8rem;margin-bottom:1rem;}
+  .tabela-pts th{background:#111;padding:.6rem 1rem;text-align:left;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);}
+  .tabela-pts td{padding:.7rem 1rem;border-bottom:1px solid var(--border);}
+  .tabela-pts tr:last-child td{border-bottom:none;}
+  .pts-pos{color:var(--verde);font-weight:700;}
+  .pts-neg{color:var(--vermelho);font-weight:700;}
+  .pts-neutral{color:var(--amarelo);font-weight:700;}
+  .highlight-box{background:rgba(255,214,0,.05);border:1px solid rgba(255,214,0,.25);padding:1rem 1.25rem;margin:1rem 0;}
+  .warn-box{background:rgba(213,0,0,.08);border:1px solid rgba(213,0,0,.3);padding:1rem 1.25rem;margin:1rem 0;}
+  .duplo-box{background:rgba(255,109,0,.08);border:1px solid rgba(255,109,0,.3);padding:1rem 1.25rem;margin:1rem 0;}
+  .box-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;margin-bottom:.5rem;}
+  .box-title.amarelo{color:var(--amarelo);}
+  .box-title.vermelho{color:var(--vermelho);}
+  .box-title.laranja{color:var(--laranja);}
+  ul{list-style:none;padding:0;}
+  ul li{padding:.3rem 0 .3rem 1.5rem;position:relative;font-size:.9rem;line-height:1.6;}
+  ul li::before{content:'→';position:absolute;left:0;color:var(--muted);}
+  .desempate-list{counter-reset:desempate;}
+  .desempate-list li{counter-increment:desempate;}
+  .desempate-list li::before{content:counter(desempate)'.';color:var(--amarelo);font-family:'IBM Plex Mono',monospace;font-weight:700;}
+  footer{text-align:center;padding:2rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.7rem;border-top:1px solid var(--border);margin-top:3rem;}
+  @media(max-width:600px){header{padding:1rem;}main{padding:1rem;}.logo-title{font-size:1.6rem;}.tabela-pts{font-size:.7rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-title">⚽ Bolão Pistolando™</span>
+      <span class="logo-sub">NAFTA Edition 2026 · Soccer Fofo</span>
+    </div>
+    <nav>
+      <a href="index.html">Ranking</a>
+      <a href="jogos.html">Jogos</a>
+      <a href="palpitar.html">Palpitar</a>
+      <a href="regulamento.html" class="active">Regulamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">📋 Regulamento Oficial</h2>
+  <p>Bem-vindos ao <strong>Bolão Pistolando™ NAFTA Edition 2026</strong> — Soccer Fofo. As regras foram elaboradas pelo comitê responsável e são de cumprimento obrigatório.</p>
+
+  <div class="highlight-box">
+    <div class="box-title amarelo">⏰ Prazo da Fase de Grupos</div>
+    <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:.85rem">
+      Palpites enviados até <strong>10/06/2026 às 23:59h</strong> ao Thiago via mensagem privada.<br>
+      Os palpites serão revelados a todos antes de México × África do Sul.
+    </p>
+  </div>
+
+  <!-- FASE DE GRUPOS -->
+  <h2 class="section-title">⚽ Pontuação — Fase de Grupos</h2>
+
+  <table class="tabela-pts">
+    <thead><tr><th>Situação</th><th>Pontos</th></tr></thead>
+    <tbody>
+      <tr><td>Acertou o placar exato (CRAVADA)</td><td class="pts-pos">+3 pts</td></tr>
+      <tr><td>Acertou o vencedor ou empate</td><td class="pts-pos">+2 pts</td></tr>
+      <tr><td>Acertou o nº de gols de um dos times (consolação)</td><td class="pts-pos">+0,5 pt</td></tr>
+      <tr><td>CRAVADA INVERTIDA™ (placar trocado, ex: apostou 2×0 e saiu 0×2)</td><td class="pts-neg">−3 pts</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Pontuações não são cumulativas</strong> — prevalece sempre a de maior valor. O bônus de 0,5 gol só vale se você não acertou o resultado.</p>
+
+  <!-- MATA-MATA -->
+  <h2 class="section-title">🏆 Pontuação — Mata-Mata</h2>
+  <p>As pontuações crescem a cada fase para dar chance a quem se deu mal na primeira fase.</p>
+
+  <table class="tabela-pts">
+    <thead>
+      <tr>
+        <th>Situação</th>
+        <th>16avos</th>
+        <th>Oitavas</th>
+        <th>Quartas</th>
+        <th>Semi / 3º</th>
+        <th>Final</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>CRAVADA (vitória)</td><td class="pts-pos">+6</td><td class="pts-pos">+9</td><td class="pts-pos">+12</td><td class="pts-pos">+15</td><td class="pts-pos">+18</td></tr>
+      <tr><td>Acertou o vencedor</td><td class="pts-pos">+4</td><td class="pts-pos">+6</td><td class="pts-pos">+8</td><td class="pts-pos">+10</td><td class="pts-pos">+12</td></tr>
+      <tr><td>Acertou nº de gols (sem acertar vencedor)</td><td class="pts-pos">+1</td><td class="pts-pos">+1,5</td><td class="pts-pos">+2</td><td class="pts-pos">+2,5</td><td class="pts-pos">+3</td></tr>
+      <tr><td>CRAVADA INVERTIDA™</td><td class="pts-neg">−6</td><td class="pts-neg">−9</td><td class="pts-neg">−12</td><td class="pts-neg">−15</td><td class="pts-neg">−18</td></tr>
+      <tr><td>Empate CRAVADO (placar exato)</td><td class="pts-neutral">+3</td><td class="pts-neutral">+4,5</td><td class="pts-neutral">+6</td><td class="pts-neutral">+7,5</td><td class="pts-neutral">+9</td></tr>
+      <tr><td>Apostou empate, gols diferentes</td><td class="pts-pos">+1</td><td class="pts-pos">+1,5</td><td class="pts-pos">+2</td><td class="pts-pos">+2,5</td><td class="pts-pos">+3</td></tr>
+      <tr><td>+ Acertou o vencedor dos pênaltis</td><td class="pts-pos">+1</td><td class="pts-pos">+1,5</td><td class="pts-pos">+2</td><td class="pts-pos">+2,5</td><td class="pts-pos">+3</td></tr>
+      <tr><td>− Errou o vencedor dos pênaltis</td><td class="pts-neg">−3</td><td class="pts-neg">−4,5</td><td class="pts-neg">−6</td><td class="pts-neg">−7,5</td><td class="pts-neg">−9</td></tr>
+    </tbody>
+  </table>
+
+  <p>* Gols na prorrogação contam para o resultado apostado.</p>
+
+  <!-- DUPLO -->
+  <h2 class="section-title">⚡ Pontuação Duplicada</h2>
+
+  <div class="duplo-box">
+    <div class="box-title laranja">Jogos com pontuação 2× (tudo dobra, pra bem e pro mal)</div>
+    <ul>
+      <li>México × África do Sul — jogo de abertura da Copa</li>
+      <li>Todas as partidas do Brasil (enquanto permanecer na competição)</li>
+      <li>Todas as partidas da Argentina (enquanto permanecer na competição)</li>
+      <li>Todas as partidas do anfitrião com melhor campanha na fase de grupos (EUA, Canadá ou México) — definido ao fim da 1ª fase</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-title vermelho">⚠️ Atenção — Cravada Invertida™ em jogo duplo</div>
+    <p style="margin:0;font-size:.85rem;font-family:'IBM Plex Mono',monospace">
+      Uma Cravada Invertida™ num jogo do Brasil ou Argentina rende <strong>−6 pts na fase de grupos</strong>.<br>
+      Se o México for o melhor anfitrião, o jogo de abertura pode valer até <strong>12 pts</strong> (ou −12).
+    </p>
+  </div>
+
+  <!-- EXTRAS -->
+  <h2 class="section-title">🎯 Pontuações Extras</h2>
+  <p>Confirmadas apenas ao fim da fase de grupos:</p>
+
+  <table class="tabela-pts">
+    <thead><tr><th>Bônus</th><th>Pontos</th><th>Como</th></tr></thead>
+    <tbody>
+      <tr><td>Artilheiro da fase de grupos</td><td class="pts-pos">+15 pts</td><td>Escolha livre</td></tr>
+      <tr><td>Melhor ataque da 1ª fase</td><td class="pts-pos">+10 pts</td><td>Escolha livre</td></tr>
+      <tr><td>Melhor defesa da 1ª fase</td><td class="pts-pos">+10 pts</td><td>Escolha livre</td></tr>
+      <tr><td>Favorito eliminado na 1ª fase</td><td class="pts-pos">+10 pts</td><td>Dentre as opções fornecidas</td></tr>
+      <tr><td>Zebra classificada</td><td class="pts-pos">+10 pts</td><td>Dentre as opções fornecidas</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PRAZOS MATA-MATA -->
+  <h2 class="section-title">📅 Prazos de Entrega — Mata-Mata</h2>
+  <ul>
+    <li><strong>16avos de final:</strong> 28/06 antes do primeiro jogo</li>
+    <li><strong>Oitavas de final:</strong> 04/07 antes do primeiro jogo</li>
+    <li><strong>Quartas de final:</strong> 09/07 antes do primeiro jogo</li>
+    <li><strong>Semifinal:</strong> 14/07 antes do primeiro jogo</li>
+    <li><strong>3º Lugar:</strong> 18/07 antes do jogo</li>
+    <li><strong>Final:</strong> 19/07 antes do jogo</li>
+  </ul>
+  <p style="margin-top:.75rem;font-size:.85rem;color:var(--muted);font-family:'IBM Plex Mono',monospace">
+    É possível reenviar os palpites antes do prazo caso surja nova informação (ex: lesão de jogador titular).
+  </p>
+
+  <!-- DESEMPATE -->
+  <h2 class="section-title">⚖️ Critérios de Desempate</h2>
+  <p>Em caso de empate na pontuação total, na ordem:</p>
+  <ul class="desempate-list">
+    <li>Maior número de Cravadas</li>
+    <li>Maior número de acertos de resultado (vencedor/empate)</li>
+    <li>Maior acerto da quantidade de gols</li>
+    <li>Menor número de Cravadas Invertidas™</li>
+  </ul>
+  <p style="margin-top:.75rem;font-size:.85rem">Se persistir o empate, repetem-se os critérios apenas para os jogos de pontuação duplicada.</p>
+
+  <!-- PREMIAÇÃO -->
+  <h2 class="section-title">🏅 Premiação</h2>
+  <div class="highlight-box">
+    <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:.85rem;line-height:1.8">
+      🥇 1º lugar: <strong style="color:var(--amarelo)">60%</strong> do total arrecadado<br>
+      🥈 2º lugar: <strong style="color:#C0C0C0">30%</strong> do total arrecadado<br>
+      🥉 3º lugar: <strong style="color:#CD7F32">10%</strong> do total arrecadado<br><br>
+      Depósito via PIX. Cota paga uma única vez — válida para toda a competição.
+    </p>
+  </div>
+
+</main>
+
+<footer>Bolão Pistolando™ NAFTA Edition 2026 · Soccer Fofo</footer>
+</body>
+</html>

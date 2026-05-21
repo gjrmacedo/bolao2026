@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palpitar · Bolão Pistolando™ NAFTA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde:#00c853; --amarelo:#ffd600; --laranja:#ff6d00; --vermelho:#d50000;
+    --bg:#0a0a0a; --card:#141414; --border:#222; --text:#f0f0f0; --muted:#666;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; }
+
+  header {
+    background:linear-gradient(135deg,#0a2463 0%,#0d1b2a 60%,#0a0a0a 100%);
+    border-bottom:3px solid var(--amarelo); padding:1.5rem 2rem; position:sticky; top:0; z-index:100;
+  }
+  .header-inner { max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+  .logo-title { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--amarelo); letter-spacing:.05em; }
+  .logo-sub { font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--muted); letter-spacing:.15em; text-transform:uppercase; display:block; }
+  nav { display:flex; gap:.5rem; flex-wrap:wrap; }
+  nav a { text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);color:var(--muted);transition:all .15s; }
+  nav a:hover, nav a.active { border-color:var(--amarelo);color:var(--amarelo);background:rgba(255,214,0,.06); }
+
+  main { max-width:900px; margin:0 auto; padding:2rem; }
+
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.05em; color:var(--text); margin-bottom:1.5rem; display:flex; align-items:center; gap:.75rem; }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  .card { background:var(--card); border:1px solid var(--border); padding:1.5rem; margin-bottom:1.5rem; }
+
+  .prazo-box {
+    background:rgba(255,214,0,.06); border:1px solid rgba(255,214,0,.3);
+    padding:1.25rem 1.5rem; margin-bottom:2rem;
+  }
+  .prazo-title { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--amarelo); margin-bottom:.5rem; }
+  .prazo-text { font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--text); line-height:1.7; }
+
+  .steps { list-style:none; counter-reset:steps; }
+  .steps li {
+    counter-increment:steps; padding:.75rem 0 .75rem 3rem; border-bottom:1px solid var(--border);
+    position:relative; font-size:.9rem; line-height:1.6;
+  }
+  .steps li:last-child { border-bottom:none; }
+  .steps li::before {
+    content:counter(steps); position:absolute; left:0; top:.75rem;
+    width:1.75rem; height:1.75rem; background:var(--amarelo); color:#000;
+    font-family:'Bebas Neue',sans-serif; font-size:1rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .code-block {
+    background:#0d0d0d; border:1px solid var(--border); padding:1.25rem;
+    font-family:'IBM Plex Mono',monospace; font-size:.75rem; line-height:1.7;
+    overflow-x:auto; white-space:pre; color:#aaa; margin-top:.75rem;
+  }
+  .code-block .key { color:#7dd3fc; }
+  .code-block .val { color:#86efac; }
+  .code-block .str { color:#fca5a5; }
+  .code-block .num { color:#fdba74; }
+  .code-block .com { color:#555; font-style:italic; }
+
+  .copy-btn {
+    display:inline-block; margin-top:.75rem; padding:.5rem 1.25rem;
+    font-family:'IBM Plex Mono',monospace; font-size:.75rem; font-weight:600;
+    letter-spacing:.08em; text-transform:uppercase; background:transparent;
+    border:1px solid var(--amarelo); color:var(--amarelo); cursor:pointer; transition:all .15s;
+  }
+  .copy-btn:hover { background:rgba(255,214,0,.1); }
+
+  .warn-box { background:rgba(213,0,0,.08); border:1px solid rgba(213,0,0,.3); padding:1rem 1.5rem; margin-top:1rem; }
+  .warn-title { font-family:'Bebas Neue',sans-serif; color:var(--vermelho); font-size:1rem; margin-bottom:.4rem; }
+  .warn-text { font-family:'IBM Plex Mono',monospace; font-size:.75rem; line-height:1.7; color:#ff9090; }
+
+  .extras-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin-top:1rem; }
+  .extra-item { background:#0d0d0d; border:1px solid var(--border); padding:1rem; }
+  .extra-pts { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--verde); }
+  .extra-label { font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-top:.25rem; }
+
+  footer { text-align:center;padding:2rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.7rem;border-top:1px solid var(--border);margin-top:3rem; }
+
+  @media(max-width:600px){ header{padding:1rem;} main{padding:1rem;} .logo-title{font-size:1.6rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-title">⚽ Bolão Pistolando™</span>
+      <span class="logo-sub">NAFTA Edition 2026 · Soccer Fofo</span>
+    </div>
+    <nav>
+      <a href="index.html">Ranking</a>
+      <a href="jogos.html">Jogos</a>
+      <a href="palpitar.html" class="active">Palpitar</a>
+      <a href="regulamento.html">Regulamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h2 class="section-title">📝 Como Palpitar</h2>
+
+  <div class="prazo-box">
+    <div class="prazo-title">⏰ Prazo — Fase de Grupos</div>
+    <div class="prazo-text">
+      Envie seus palpites até <strong style="color:var(--amarelo)">10/06/2026 às 23:59h</strong> para o Thiago via mensagem privada.<br>
+      Os palpites de todos serão revelados antes do jogo México × África do Sul.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;margin-bottom:1rem;color:var(--amarelo)">Passo a Passo</h3>
+    <ol class="steps">
+      <li>Baixe o JSON modelo abaixo (ou copie o conteúdo)</li>
+      <li>Salve com o nome <code style="font-family:'IBM Plex Mono',monospace;background:#111;padding:.1rem .4rem">BOLAO2026_SEUNOME.json</code></li>
+      <li>Preencha seu nome no campo <code style="font-family:'IBM Plex Mono',monospace;background:#111;padding:.1rem .4rem">"nome"</code></li>
+      <li>Para cada jogo (1 a 72), informe quantos gols você acha que cada time vai fazer</li>
+      <li>Preencha as 5 apostas de bônus no final</li>
+      <li>Mande o arquivo pro Thiago — simples assim!</li>
+    </ol>
+  </div>
+
+  <div class="warn-box">
+    <div class="warn-title">⚠️ Atenção: Jogos de mata-mata</div>
+    <div class="warn-text">
+      Para os jogos de mata-mata (16avos em diante), se você acha que o jogo vai terminar empatado no tempo normal,
+      você DEVE informar também o campo <code>"penaltis_vencedor"</code> com o nome da seleção que você acha que vence nos pênaltis.
+      Se não preencher, perde o bônus de +pts e pode ganhar -pts.
+    </div>
+  </div>
+
+  <h2 class="section-title" style="margin-top:2.5rem">⚡ Pontuações Bônus</h2>
+  <div class="extras-grid">
+    <div class="extra-item"><div class="extra-pts">+15pts</div><div class="extra-label">Artilheiro da fase de grupos</div></div>
+    <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Melhor ataque da 1ª fase</div></div>
+    <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Melhor defesa da 1ª fase</div></div>
+    <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Favorito eliminado na 1ª fase</div></div>
+    <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Zebra classificada na 1ª fase</div></div>
+  </div>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:.75rem">
+    Favoritos = melhor colocado no ranking FIFA de cada grupo. Zebras = pior colocado por grupo. Ataque/defesa e artilheiro são livres.
+  </p>
+
+  <h2 class="section-title" style="margin-top:2.5rem">📄 JSON Modelo</h2>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--muted);margin-bottom:1rem">
+    Abaixo os primeiros jogos como exemplo. O arquivo completo tem todos os 104 jogos.
+  </p>
+
+  <div class="code-block"><span class="com">// BOLAO2026_SEUNOME.json — Preencha e envie pro Thiago</span>
+{
+  <span class="key">"nome"</span>: <span class="str">"SEU NOME AQUI"</span>,
+  <span class="key">"palpites"</span>: {
+    <span class="com">// Jogo 1 — 11/jun 16h — Grupo A — Cidade do México</span>
+    <span class="com">// México × África do Sul (JOGO DE ABERTURA — 2×)</span>
+    <span class="key">"1"</span>: { <span class="key">"gols_casa"</span>: <span class="num">2</span>, <span class="key">"gols_fora"</span>: <span class="num">1</span> },
+
+    <span class="com">// Jogo 2 — 11/jun 23h — Grupo A — Guadalajara</span>
+    <span class="com">// Coreia do Sul × Tchéquia</span>
+    <span class="key">"2"</span>: { <span class="key">"gols_casa"</span>: <span class="num">1</span>, <span class="key">"gols_fora"</span>: <span class="num">1</span> },
+
+    <span class="com">// Jogo 7 — 13/jun 19h — Grupo C — Nova York</span>
+    <span class="com">// Brasil × Marrocos (2× — BRASIL)</span>
+    <span class="key">"7"</span>: { <span class="key">"gols_casa"</span>: <span class="num">3</span>, <span class="key">"gols_fora"</span>: <span class="num">0</span> },
+
+    <span class="com">// ... todos os outros jogos até o 104</span>
+
+    <span class="com">// Exemplo de mata-mata com empate apostado (16avos em diante):</span>
+    <span class="key">"73"</span>: {
+      <span class="key">"gols_casa"</span>: <span class="num">1</span>,
+      <span class="key">"gols_fora"</span>: <span class="num">1</span>,
+      <span class="key">"penaltis_vencedor"</span>: <span class="str">"Brasil"</span>  <span class="com">// obrigatório se apostou empate!</span>
+    }
+  },
+  <span class="key">"extras"</span>: {
+    <span class="key">"melhor_ataque"</span>: <span class="str">"Brasil"</span>,         <span class="com">// seleção com mais gols na fase de grupos</span>
+    <span class="key">"melhor_defesa"</span>: <span class="str">"França"</span>,         <span class="com">// seleção com menos gols sofridos</span>
+    <span class="key">"favorito_eliminado"</span>: <span class="str">"Alemanha"</span>,  <span class="com">// favorito que cai na 1ª fase (1º do ranking FIFA do grupo)</span>
+    <span class="key">"zebra_classificada"</span>: <span class="str">"Haiti"</span>,    <span class="com">// azarão que passa (último no ranking FIFA do grupo)</span>
+    <span class="key">"artilheiro"</span>: <span class="str">"Vinicius Jr."</span>        <span class="com">// artilheiro da fase de grupos (livre)</span>
+  }
+}</div>
+
+  <button class="copy-btn" onclick="copyTemplate()">📋 Copiar template completo</button>
+
+</main>
+
+<footer>Bolão Pistolando™ NAFTA Edition 2026</footer>
+
+<script src="engine.js"></script>
+<script>
+async function copyTemplate() {
+  try {
+    const data = await window.BolaoEngine.fetchJSON('data/palpites/exemplo.json');
+    navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => btn.textContent = '📋 Copiar template completo', 2000);
+  } catch(e) {
+    alert('Não foi possível copiar automaticamente. Abra data/palpites/exemplo.json no repositório.');
+  }
+}
+</script>
+</body>
+</html>
