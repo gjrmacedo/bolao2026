@@ -2,7 +2,7 @@
 // BOLÃO PISTOLANDO™ NAFTA EDITION 2026 — Motor de Pontuação
 // ============================================================
 
-const REPO_RAW = 'https://raw.githubusercontent.com/gjrmacedo/bolao2026/main';
+const REPO_RAW = 'https://raw.githubusercontent.com/gjrmacedo/bolao2026/refs/heads/main/';
 
 async function fetchJSON(path) {
   const res = await fetch(`${REPO_RAW}/${path}?_=${Date.now()}`);
