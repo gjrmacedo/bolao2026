@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jogos · Bolão Pistolando™ NAFTA 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 <style>
   :root {
     --verde: #00c853; --amarelo: #ffd600; --azul: #0d47a1;
@@ -82,6 +83,8 @@
 
   footer { text-align:center; padding:2rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:.7rem; border-top:1px solid var(--border); margin-top:3rem; }
 
+  .fi { vertical-align: middle; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); }
+
   @media(max-width:600px) { header{padding:1rem;} main{padding:1rem;} .logo-title{font-size:1.6rem;} }
 </style>
 </head>
@@ -111,6 +114,26 @@
 
 <script src="engine.js"></script>
 <script>
+// Bandeiras — definido localmente, não depende de cache do engine.js
+const FLAGS = {
+  'México':'mx','África do Sul':'za','Coreia do Sul':'kr','Tchéquia':'cz',
+  'Canadá':'ca','Bósnia-Herz.':'ba','Estados Unidos':'us','Paraguai':'py',
+  'Austrália':'au','Turquia':'tr','Catar':'qa','Suíça':'ch','Brasil':'br',
+  'Marrocos':'ma','Haiti':'ht','Escócia':'gb-sct','Alemanha':'de','Curaçao':'cw',
+  'Países Baixos':'nl','Japão':'jp','Costa do Marfim':'ci','Equador':'ec',
+  'Suécia':'se','Tunísia':'tn','Espanha':'es','Cabo Verde':'cv','Bélgica':'be',
+  'Egito':'eg','Arábia Saudita':'sa','Uruguai':'uy','Irã':'ir',
+  'Nova Zelândia':'nz','França':'fr','Senegal':'sn','Iraque':'iq','Noruega':'no',
+  'Argentina':'ar','Argélia':'dz','Áustria':'at','Jordânia':'jo','Portugal':'pt',
+  'RD Congo':'cd','Inglaterra':'gb-eng','Croácia':'hr','Gana':'gh',
+  'Panamá':'pa','Uzbequistão':'uz','Colômbia':'co',
+};
+function flagTeam(nome) {
+  if (!nome) return '';
+  const code = FLAGS[nome];
+  return code ? `<span class="fi fi-${code}"></span> ${nome}` : nome;
+}
+
 const FASE_LABELS = {
   grupos:'Fase de Grupos', '16avos':'16avos de Final', oitavas:'Oitavas de Final',
   quartas:'Quartas de Final', semi:'Semifinal', terceiro:'3º Lugar', final:'Final'
@@ -126,6 +149,7 @@ function isPotDuplo(jogo) {
 
 function renderJogos() {
   const app = document.getElementById('app');
+  const ft = flagTeam;
   let html = '';
 
   // Filtros
@@ -186,7 +210,7 @@ function renderJogos() {
         if (jogo.duplicado) html += `<span class="duplo-badge d">2×</span>`;
         else if (potD) html += `<span class="duplo-badge p">2×?</span>`;
         html += `<div class="jogo-meta">#${jogo.id} · ${dataFmt}</div>`;
-        html += `<div class="jogo-times"><span>${jogo.casa}</span><span class="jogo-vs">×</span><span>${jogo.fora}</span></div>`;
+        html += `<div class="jogo-times"><span>${ft(jogo.casa)}</span><span class="jogo-vs">×</span><span>${ft(jogo.fora)}</span></div>`;
         if (temRes) {
           html += `<div class="jogo-resultado">${res.gols_casa} – ${res.gols_fora}</div>`;
           if (res.penaltis_vencedor) html += `<div class="jogo-pen">Pênaltis: ${res.penaltis_vencedor}</div>`;

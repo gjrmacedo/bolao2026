@@ -4,6 +4,15 @@
 
 const REPO_RAW = 'https://raw.githubusercontent.com/gjrmacedo/bolao2026/refs/heads/main/';
 
+// Palpites só ficam visíveis 10min antes do início OU quando todos já enviaram
+function palpitesVisiveis(jogo, participantesArr) {
+  const idStr = String(jogo.id);
+  const agora = Date.now();
+  const jogoTime = new Date(jogo.data).getTime();
+  if (agora >= jogoTime - 600000) return true;
+  return participantesArr.every(p => p.palpites?.[idStr] !== undefined);
+}
+
 async function fetchJSON(path) {
   const res = await fetch(`${REPO_RAW}/${path}?_=${Date.now()}`);
   if (!res.ok) throw new Error(`Erro ao carregar ${path}: ${res.status}`);
@@ -172,7 +181,13 @@ async function calcularRanking() {
     return a.invertidas - b.invertidas;
   });
 
-  return { ranking, jogos: dadosJogos.jogos, resultados, anfitriaoBest };
+  return {
+    ranking,
+    jogos: dadosJogos.jogos,
+    resultados,
+    anfitriaoBest,
+    participantes: participantes.map(p => ({ nome: p.nome, palpites: p.palpites || {} })),
+  };
 }
 
-window.BolaoEngine = { calcularRanking, fetchJSON, REPO_RAW };
+window.BolaoEngine = { calcularRanking, fetchJSON, REPO_RAW, palpitesVisiveis };
