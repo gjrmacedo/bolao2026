@@ -1,15 +1,14 @@
 {
-  "_instrucoes": "Preencha os campos 'gols_casa' e 'gols_fora' com o resultado ao fim do tempo regulamentar + prorrogação. Para jogos da fase de mata-mata que foram a pênaltis, preencha também 'penaltis_vencedor'. Deixe null enquanto o jogo não aconteceu.",
+  "_instrucoes": "Preencha 'gols_casa' e 'gols_fora' com o resultado ao fim do tempo regulamentar + prorrogação. Para jogos de mata-mata que foram a pênaltis, preencha também 'penaltis_vencedor'. Nos jogos de mata-mata, preencha 'casa' e 'fora' com os nomes reais das seleções classificadas (necessário para a dobra de Brasil/Argentina/anfitrião continuar valendo). Deixe os jogos sem resultado fora do bloco 'resultados'.",
+  "_instrucoes_extras": "Em 'extras': 'favoritos_eliminados' é a lista de favoritos que caíram na fase de grupos (cada acerto vale 10). 'zebra_posicoes' mapeia cada zebra classificada para sua colocação final no grupo (1, 2 ou 3) — pontua 30/20/10; zebras eliminadas ficam de fora. 'melhor_ataque', 'melhor_defesa' e 'artilheiro' recebem o nome correto ao fim da fase de grupos.",
   "_anfitriao_melhor_campanha": null,
   "_nota_anfitriao": "Preencha com 'Estados Unidos', 'Canadá' ou 'México' ao fim da fase de grupos para ativar a duplicação correta.",
-  "resultados": {
-    "1": {"gols_casa": 2, "gols_fora": 1},
-    "2": {"gols_casa": 1, "gols_fora": 0},
-    "3": {"gols_casa": 1, "gols_fora": 0},
-    "4": {"gols_casa": 2, "gols_fora": 0},
-    "5": {"gols_casa": 1, "gols_fora": 2},
-    "6": {"gols_casa": 0, "gols_fora": 3},
-    "7": {"gols_casa": 2, "gols_fora": 1},
-    "8": {"gols_casa": 0, "gols_fora": 2}
+  "resultados": {},
+  "extras": {
+    "melhor_ataque": null,
+    "melhor_defesa": null,
+    "artilheiro": null,
+    "favoritos_eliminados": [],
+    "zebra_posicoes": {}
   }
 }

@@ -533,7 +533,19 @@ function flagTeam(nome) {
 }
 
 // Estado global
-let allRanking = [], allParticipantes = [], allJogos = [], allResultados = {};
+let allRanking = [], allParticipantes = [], allJogos = [], allResultados = {}, allAnfitriaoBest = null;
+
+// Times efetivos: no mata-mata os nomes reais vêm do resultado quando preenchidos
+function timesDoJogo(jogo) {
+  const res = allResultados[String(jogo.id)];
+  return {
+    casa: (res && res.casa) || jogo.casa,
+    fora: (res && res.fora) || jogo.fora,
+  };
+}
+function fatorJogo(jogo) {
+  return window.BolaoEngine.fatorDuplicacao(jogo, allResultados[String(jogo.id)], allAnfitriaoBest);
+}
 
 function palpitesVisiveis(jogo) {
   const idStr = String(jogo.id);
@@ -564,12 +576,13 @@ function abrirPalpites(jogoId) {
     weekday: 'short', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
   });
 
+  const { casa, fora } = timesDoJogo(jogo);
   let html = `<div class="modal-header">
     <div class="modal-jogo-meta">${jogo.grupo ? 'Grupo ' + jogo.grupo : jogo.fase} · #${jogo.id} · ${dataFmt}</div>
     <div class="modal-jogo-times">
-      <span>${flagTeam(jogo.casa)}</span>
+      <span>${flagTeam(casa)}</span>
       <span class="modal-vs">×</span>
-      <span>${flagTeam(jogo.fora)}</span>
+      <span>${flagTeam(fora)}</span>
     </div>
     ${temRes ? `<div class="modal-resultado">${res.gols_casa} – ${res.gols_fora}${res.penaltis_vencedor ? ' <small style="font-size:.8rem;color:var(--muted)">(pen: ' + res.penaltis_vencedor + ')</small>' : ''}</div>` : ''}
     <div class="modal-sede">📍 ${jogo.sede}</div>
@@ -623,6 +636,7 @@ async function render() {
     allParticipantes = Array.isArray(participantes) ? participantes : [];
     allJogos = jogos;
     allResultados = resultados;
+    allAnfitriaoBest = anfitriaoBest || null;
 
     // Próximos jogos (sem resultado, ordenados por data) — até 4
     const agora = Date.now();
@@ -699,14 +713,15 @@ async function render() {
         const jogo = jogos.find(j => j.id === id);
         const res = resultados[String(id)];
         if (!jogo || !res) return;
-        const dupClass = jogo.duplicado ? 'duplicado' : '';
+        const { casa, fora } = timesDoJogo(jogo);
+        const dupClass = fatorJogo(jogo) > 1 ? 'duplicado' : '';
         const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
         html += `<div class="jogo-card ${dupClass}" onclick="abrirPalpites(${id})">
-          <div class="jogo-meta">Grupo ${jogo.grupo || jogo.fase.toUpperCase()} · ${dataFmt}</div>
+          <div class="jogo-meta">${jogo.grupo ? 'Grupo ' + jogo.grupo : jogo.fase.toUpperCase()} · ${dataFmt}</div>
           <div class="jogo-times">
-            <span>${flagTeam(jogo.casa)}</span>
+            <span>${flagTeam(casa)}</span>
             <span class="jogo-vs">×</span>
-            <span>${flagTeam(jogo.fora)}</span>
+            <span>${flagTeam(fora)}</span>
           </div>
           <div class="jogo-resultado">${res.gols_casa} – ${res.gols_fora}${res.penaltis_vencedor ? ' <small style="font-size:0.9rem;color:var(--muted)">(pen: '+res.penaltis_vencedor+')</small>' : ''}</div>
           <div class="jogo-sede">📍 ${jogo.sede}</div>
@@ -724,15 +739,17 @@ async function render() {
       </p>`;
       html += `<div class="jogos-grid">`;
       proximos.forEach(jogo => {
-        const anfClass = ['Estados Unidos','Canadá','México'].includes(jogo.casa) || ['Estados Unidos','Canadá','México'].includes(jogo.fora) ? 'pot-duplicado' : '';
-        const dupClass = jogo.duplicado ? 'duplicado' : anfClass;
+        const { casa, fora } = timesDoJogo(jogo);
+        const anfitrioes = ['Estados Unidos','Canadá','México'];
+        const anfClass = anfitrioes.includes(casa) || anfitrioes.includes(fora) ? 'pot-duplicado' : '';
+        const dupClass = fatorJogo(jogo) > 1 ? 'duplicado' : anfClass;
         const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', { weekday:'short', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
         html += `<div class="jogo-card ${dupClass}" onclick="abrirPalpites(${jogo.id})">
           <div class="jogo-meta">${jogo.grupo ? 'Grupo '+jogo.grupo : jogo.fase} · ${dataFmt}</div>
           <div class="jogo-times">
-            <span>${flagTeam(jogo.casa)}</span>
+            <span>${flagTeam(casa)}</span>
             <span class="jogo-vs">×</span>
-            <span>${flagTeam(jogo.fora)}</span>
+            <span>${flagTeam(fora)}</span>
           </div>
           <div class="jogo-sede">📍 ${jogo.sede}</div>
           <div class="jogo-hint">clique para ver palpites</div>

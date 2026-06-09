@@ -140,11 +140,27 @@ const FASE_LABELS = {
 };
 const ANFITRIOES = ['Estados Unidos','Canadá','México'];
 
-let todosJogos = [], todosResultados = {};
+let todosJogos = [], todosResultados = {}, anfitriaoBest = null;
 let filtroAtivo = 'todos';
 
+// Times efetivos: no mata-mata os nomes reais vêm do resultado quando preenchidos
+function timesDoJogo(jogo) {
+  const res = todosResultados[String(jogo.id)];
+  return {
+    casa: (res && res.casa) || jogo.casa,
+    fora: (res && res.fora) || jogo.fora,
+  };
+}
+
 function isPotDuplo(jogo) {
-  return ANFITRIOES.includes(jogo.casa) || ANFITRIOES.includes(jogo.fora);
+  const { casa, fora } = timesDoJogo(jogo);
+  return ANFITRIOES.includes(casa) || ANFITRIOES.includes(fora);
+}
+
+// Fator real de dobra (2× ou 4×) usando a lógica do motor
+function fatorJogo(jogo) {
+  const res = todosResultados[String(jogo.id)];
+  return window.BolaoEngine.fatorDuplicacao(jogo, res, anfitriaoBest);
 }
 
 function renderJogos() {
@@ -166,11 +182,12 @@ function renderJogos() {
   let jogos = todosJogos.filter(j => {
     const res = todosResultados[String(j.id)];
     const temRes = res && res.gols_casa !== null && res.gols_casa !== undefined;
+    const tj = timesDoJogo(j);
     if (filtroAtivo === 'proximos') return !temRes;
     if (filtroAtivo === 'encerrados') return temRes;
-    if (filtroAtivo === 'brasil') return j.casa === 'Brasil' || j.fora === 'Brasil';
-    if (filtroAtivo === 'argentina') return j.casa === 'Argentina' || j.fora === 'Argentina';
-    if (filtroAtivo === 'duplos') return j.duplicado || isPotDuplo(j);
+    if (filtroAtivo === 'brasil') return tj.casa === 'Brasil' || tj.fora === 'Brasil';
+    if (filtroAtivo === 'argentina') return tj.casa === 'Argentina' || tj.fora === 'Argentina';
+    if (filtroAtivo === 'duplos') return fatorJogo(j) > 1 || isPotDuplo(j);
     return true;
   });
 
@@ -196,10 +213,12 @@ function renderJogos() {
       porFase[fase][g].forEach(jogo => {
         const res = todosResultados[String(jogo.id)];
         const temRes = res && res.gols_casa !== null && res.gols_casa !== undefined;
-        const potD = isPotDuplo(jogo) && !jogo.duplicado;
+        const { casa, fora } = timesDoJogo(jogo);
+        const fator = fatorJogo(jogo);
+        const potD = fator === 1 && isPotDuplo(jogo);
         const cardClass = [
           temRes ? 'tem-resultado' : '',
-          jogo.duplicado ? 'duplicado' : potD ? 'pot-duplicado' : '',
+          fator > 1 ? 'duplicado' : potD ? 'pot-duplicado' : '',
         ].filter(Boolean).join(' ');
 
         const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', {
@@ -207,10 +226,10 @@ function renderJogos() {
         });
 
         html += `<div class="jogo-card ${cardClass}">`;
-        if (jogo.duplicado) html += `<span class="duplo-badge d">2×</span>`;
+        if (fator > 1) html += `<span class="duplo-badge d">${fator}×</span>`;
         else if (potD) html += `<span class="duplo-badge p">2×?</span>`;
         html += `<div class="jogo-meta">#${jogo.id} · ${dataFmt}</div>`;
-        html += `<div class="jogo-times"><span>${ft(jogo.casa)}</span><span class="jogo-vs">×</span><span>${ft(jogo.fora)}</span></div>`;
+        html += `<div class="jogo-times"><span>${ft(casa)}</span><span class="jogo-vs">×</span><span>${ft(fora)}</span></div>`;
         if (temRes) {
           html += `<div class="jogo-resultado">${res.gols_casa} – ${res.gols_fora}</div>`;
           if (res.penaltis_vencedor) html += `<div class="jogo-pen">Pênaltis: ${res.penaltis_vencedor}</div>`;
@@ -243,6 +262,7 @@ async function init() {
     ]);
     todosJogos = dados.jogos;
     todosResultados = resultadosData.resultados || {};
+    anfitriaoBest = resultadosData._anfitriao_melhor_campanha || null;
     renderJogos();
   } catch(err) {
     app.innerHTML = `<div style="background:rgba(213,0,0,.1);border:1px solid rgba(213,0,0,.3);padding:1.5rem;color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-size:.85rem">${err.message}</div>`;

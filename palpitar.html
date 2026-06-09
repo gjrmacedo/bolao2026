@@ -138,10 +138,10 @@
     <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Melhor ataque da 1ª fase</div></div>
     <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Melhor defesa da 1ª fase</div></div>
     <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Favorito eliminado na 1ª fase</div></div>
-    <div class="extra-item"><div class="extra-pts">+10pts</div><div class="extra-label">Zebra classificada na 1ª fase</div></div>
+    <div class="extra-item"><div class="extra-pts">+10/20/30</div><div class="extra-label">Zebra classificada (3º/2º/1º no grupo)</div></div>
   </div>
   <p style="font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:.75rem">
-    Favoritos = melhor colocado no ranking FIFA de cada grupo. Zebras = pior colocado por grupo. Ataque/defesa e artilheiro são livres.
+    Favoritos = melhor colocado no ranking FIFA de cada grupo. Zebras = pior colocado por grupo. A zebra rende <strong>10 (3º), 20 (2º) ou 30 (1º)</strong> conforme onde terminar; eliminada = 0. Ataque/defesa e artilheiro são livres. Favorito e zebra devem ser escolhidos dentre as opções da planilha.
   </p>
 
   <h2 class="section-title" style="margin-top:2.5rem">📄 JSON Modelo</h2>
@@ -177,8 +177,8 @@
   <span class="key">"extras"</span>: {
     <span class="key">"melhor_ataque"</span>: <span class="str">"Brasil"</span>,         <span class="com">// seleção com mais gols na fase de grupos</span>
     <span class="key">"melhor_defesa"</span>: <span class="str">"França"</span>,         <span class="com">// seleção com menos gols sofridos</span>
-    <span class="key">"favorito_eliminado"</span>: <span class="str">"Alemanha"</span>,  <span class="com">// favorito que cai na 1ª fase (1º do ranking FIFA do grupo)</span>
-    <span class="key">"zebra_classificada"</span>: <span class="str">"Haiti"</span>,    <span class="com">// azarão que passa (último no ranking FIFA do grupo)</span>
+    <span class="key">"favorito_eliminado"</span>: <span class="str">"Alemanha"</span>,  <span class="com">// favorito que cai na 1ª fase (dentre as opções da planilha)</span>
+    <span class="key">"zebra_classificada"</span>: <span class="str">"Haiti"</span>,    <span class="com">// azarão que passa — 10/20/30 conforme termine em 3º/2º/1º (opções da planilha)</span>
     <span class="key">"artilheiro"</span>: <span class="str">"Vinicius Jr."</span>        <span class="com">// artilheiro da fase de grupos (livre)</span>
   }
 }</div>
