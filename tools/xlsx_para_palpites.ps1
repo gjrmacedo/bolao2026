@@ -64,6 +64,9 @@ if (-not $Nome) {
 if ($base -and $base -notmatch '(?i)^BOLAO2026[_\- ]') {
   $avisos.Add("Nome do arquivo fora do padrão BOLAO2026_NOME (achei: '$base').")
 }
+# Nome de exibição com espaços; slug com underscore para nome de arquivo/índice
+$Nome = ($Nome -replace '[_]+', ' ' -replace '\s+', ' ').Trim()
+$slug = ($Nome -replace '\s+', '_')
 
 # Normaliza nomes de seleções para a convenção do jogos.json
 function Norm([string]$n) {
@@ -147,6 +150,18 @@ $opcoesFav   = @($dados.opcoes_favorito)
 $opcoesZebra = @($dados.opcoes_zebra)
 $todosTimes  = @($dados.jogos | Where-Object { $_.fase -eq 'grupos' } | ForEach-Object { $_.casa, $_.fora } | Sort-Object -Unique)
 
+# Converte texto de gol em inteiro >= 0. Aceita "2" e "2.0" (Excel pode formatar
+# como decimal); rejeita vazio, negativo ou fração real (ex.: "1.5"). Retorna $null se inválido.
+function ParseGol([string]$s) {
+  if ($s -eq $null -or $s.Trim() -eq '') { return $null }
+  $d = 0.0
+  $ok = [double]::TryParse($s.Trim(), [System.Globalization.NumberStyles]::Any, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$d)
+  if (-not $ok) { return $null }
+  if ($d -lt 0) { return $null }
+  if ([math]::Floor($d) -ne $d) { return $null }
+  return [int]$d
+}
+
 # ---- Lê os palpites dos 72 jogos ----
 $palpites = [ordered]@{}
 $vistos = @{}
@@ -181,9 +196,9 @@ for ($r = 6; $r -le 51; $r++) {
     $sgf = $grupos["$($b.gf)$r"]
     $gc = $null; $gf = $null
     if ($sgc -eq $null -or "$sgc".Trim() -eq '') { $erros.Add("Jogo #$id ($par): gols da casa em branco.") }
-    elseif (-not [int]::TryParse("$sgc", [ref]$gc) -or $gc -lt 0) { $erros.Add("Jogo #$id ($par): gols da casa inválidos ('$sgc').") }
+    else { $gc = ParseGol "$sgc"; if ($gc -eq $null) { $erros.Add("Jogo #$id ($par): gols da casa inválidos ('$sgc').") } }
     if ($sgf -eq $null -or "$sgf".Trim() -eq '') { $erros.Add("Jogo #$id ($par): gols do fora em branco.") }
-    elseif (-not [int]::TryParse("$sgf", [ref]$gf) -or $gf -lt 0) { $erros.Add("Jogo #$id ($par): gols do fora inválidos ('$sgf').") }
+    else { $gf = ParseGol "$sgf"; if ($gf -eq $null) { $erros.Add("Jogo #$id ($par): gols do fora inválidos ('$sgf').") } }
 
     # célula suspeita (valor solto fora do padrão)
     $stray = $grupos["$($b.stray)$r"]
@@ -273,32 +288,24 @@ $obj = [ordered]@{
 }
 
 if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Path $OutDir | Out-Null }
-$outFile = Join-Path $OutDir ("BOLAO2026_{0}.json" -f $Nome)
+$outFile = Join-Path $OutDir ("BOLAO2026_{0}.json" -f $slug)
 $json = $obj | ConvertTo-Json -Depth 6
 [System.IO.File]::WriteAllText($outFile, $json, (New-Object System.Text.UTF8Encoding($false)))
 
 Write-Host ("OK — arquivo gerado: {0}" -f $outFile) -ForegroundColor Green
 
-# ---- Registra no index.json ----
-$nomeArq = "BOLAO2026_{0}.json" -f $Nome
+# ---- Reconstrói o index.json a partir dos arquivos presentes na pasta ----
+$nomeArq = "BOLAO2026_{0}.json" -f $slug
 if ($SkipIndex) {
   Write-Host ("Pulei o index.json (-SkipIndex). Adicione '{0}' manualmente." -f $nomeArq) -ForegroundColor Yellow
 } else {
   $indexPath = Join-Path $OutDir 'index.json'
-  $lista = @()
-  if (Test-Path $indexPath) {
-    try { $lista = @(Get-Content $indexPath -Raw -Encoding UTF8 | ConvertFrom-Json) } catch { $lista = @() }
-  }
-  $lista = @($lista | Where-Object { $_ })   # remove vazios
-  if ($lista -contains $nomeArq) {
-    Write-Host ("index.json já continha '{0}'." -f $nomeArq) -ForegroundColor Green
-  } else {
-    $lista += $nomeArq
-    $jsonIdx = ($lista | ConvertTo-Json -Compress)
-    if ($lista.Count -eq 1) { $jsonIdx = '["' + $nomeArq + '"]' }  # ConvertTo-Json vira string solta com 1 item
-    [System.IO.File]::WriteAllText($indexPath, $jsonIdx, (New-Object System.Text.UTF8Encoding($false)))
-    Write-Host ("index.json atualizado com '{0}'." -f $nomeArq) -ForegroundColor Green
-  }
+  # Lista todos os palpites presentes (exclui exemplo.json e o próprio index.json)
+  $arquivos = @(Get-ChildItem -Path $OutDir -Filter 'BOLAO2026_*.json' -File |
+                Sort-Object Name | ForEach-Object { $_.Name })
+  $jsonIdx = '[' + (($arquivos | ForEach-Object { '"' + $_ + '"' }) -join ',') + ']'
+  [System.IO.File]::WriteAllText($indexPath, $jsonIdx, (New-Object System.Text.UTF8Encoding($false)))
+  Write-Host ("index.json reconstruído ({0} participante(s)): {1}" -f $arquivos.Count, ($arquivos -join ', ')) -ForegroundColor Green
 }
 
 Write-Host "Falta só dar commit/push na branch main para entrar no ranking." -ForegroundColor Green
