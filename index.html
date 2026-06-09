@@ -483,6 +483,7 @@
     <nav>
       <a href="index.html" class="active">Ranking</a>
       <a href="jogos.html">Jogos</a>
+      <a href="extras.html">Bônus</a>
       <a href="palpitar.html">Palpitar</a>
       <a href="regulamento.html">Regulamento</a>
     </nav>
@@ -547,9 +548,17 @@ function fatorJogo(jogo) {
   return window.BolaoEngine.fatorDuplicacao(jogo, allResultados[String(jogo.id)], allAnfitriaoBest);
 }
 
+// Início da Copa = horário do primeiro jogo (México × África do Sul)
+function inicioCopa() {
+  if (!Array.isArray(allJogos) || allJogos.length === 0) return Infinity;
+  return Math.min(...allJogos.map(j => new Date(j.data).getTime()));
+}
+
 function palpitesVisiveis(jogo) {
   const idStr = String(jogo.id);
   const agora = Date.now();
+  // Trava global: nada visível antes do primeiro jogo da Copa (anti-cópia)
+  if (agora < inicioCopa()) return false;
   const jogoTime = new Date(jogo.data).getTime();
   if (agora >= jogoTime - 600000) return true;
   if (!Array.isArray(allParticipantes) || allParticipantes.length === 0) return false;
@@ -589,12 +598,19 @@ function abrirPalpites(jogoId) {
   </div>`;
 
   if (!visivel) {
-    const jogoTime = new Date(jogo.data).getTime();
-    const faltam = jogoTime - Date.now() - 600000;
-    const h = Math.floor(faltam / 3600000);
-    const m = Math.floor((faltam % 3600000) / 60000);
-    const tempoStr = h >= 24 ? `${Math.floor(h/24)}d ${h%24}h` : h > 0 ? `${h}h ${m}min` : `${m}min`;
-    html += `<div class="modal-aviso">🔒 Palpites revelados 10min antes do início ou quando todos enviarem.<br><br><span style="font-size:.7rem">Disponíveis em: ${tempoStr}</span></div>`;
+    const agora = Date.now();
+    const ini = inicioCopa();
+    if (agora < ini) {
+      const dataIni = new Date(ini).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+      html += `<div class="modal-aviso">🔒 Os palpites de <strong>todos</strong> ficam ocultos até o início da Copa<br>(${dataIni} — México × África do Sul).<br><br>É pra garantir a lisura: ninguém copia de ninguém antes da bola rolar.</div>`;
+    } else {
+      const jogoTime = new Date(jogo.data).getTime();
+      const faltam = jogoTime - Date.now() - 600000;
+      const h = Math.floor(faltam / 3600000);
+      const m = Math.floor((faltam % 3600000) / 60000);
+      const tempoStr = h >= 24 ? `${Math.floor(h/24)}d ${h%24}h` : h > 0 ? `${h}h ${m}min` : `${m}min`;
+      html += `<div class="modal-aviso">🔒 Palpites revelados 10min antes do início ou quando todos enviarem.<br><br><span style="font-size:.7rem">Disponíveis em: ${tempoStr}</span></div>`;
+    }
   } else {
     html += `<div class="modal-palpites">`;
     allParticipantes.forEach(p => {
@@ -664,6 +680,16 @@ async function render() {
       .slice(0, 4);
 
     let html = '';
+
+    // --- AVISO DE TRAVA DE PALPITES (antes do início da Copa) ---
+    const iniCopa = jogos.length ? Math.min(...jogos.map(j => new Date(j.data).getTime())) : Infinity;
+    if (Date.now() < iniCopa) {
+      const dataIni = new Date(iniCopa).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+      html += `<div style="background:rgba(255,214,0,.06);border:1px solid rgba(255,214,0,.3);padding:1rem 1.25rem;margin-bottom:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:.8rem;line-height:1.7;color:var(--text)">
+        🔒 <strong style="color:var(--amarelo)">Palpites ocultos até o início da Copa</strong> (${dataIni}).<br>
+        Ninguém vê o palpite de ninguém — nem nos jogos, nem nos bônus — até a bola rolar em México × África do Sul. É pra garantir a lisura da disputa.
+      </div>`;
+    }
 
     // --- RANKING ---
     html += `<h2 class="section-title">🏆 Classificação</h2>`;

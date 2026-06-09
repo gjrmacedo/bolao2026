@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bônus · Bolão Pistolando™ NAFTA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
+<style>
+  :root {
+    --verde:#00c853; --amarelo:#ffd600; --laranja:#ff6d00; --vermelho:#d50000;
+    --bg:#0a0a0a; --card:#141414; --border:#222; --text:#f0f0f0; --muted:#666;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; }
+  header { background:linear-gradient(135deg,#0a2463 0%,#0d1b2a 60%,#0a0a0a 100%); border-bottom:3px solid var(--amarelo); padding:1.5rem 2rem; position:sticky; top:0; z-index:100; }
+  .header-inner { max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+  .logo-title { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:var(--amarelo); letter-spacing:.05em; }
+  .logo-sub { font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--muted); letter-spacing:.15em; text-transform:uppercase; display:block; }
+  nav { display:flex; gap:.5rem; flex-wrap:wrap; }
+  nav a { text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);color:var(--muted);transition:all .15s; }
+  nav a:hover, nav a.active { border-color:var(--amarelo);color:var(--amarelo);background:rgba(255,214,0,.06); }
+
+  main { max-width:1100px; margin:0 auto; padding:2rem; }
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:.05em; color:var(--text); margin-bottom:.5rem; display:flex; align-items:center; gap:.75rem; }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .subtitle { font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--muted); margin-bottom:1.5rem; line-height:1.6; }
+
+  .tabela-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:.82rem; }
+  thead th { background:#111; padding:.75rem 1rem; text-align:left; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); border-bottom:2px solid var(--border); white-space:nowrap; }
+  tbody tr { border-bottom:1px solid var(--border); }
+  tbody tr:hover { background:#181818; }
+  tbody td { padding:.8rem 1rem; white-space:nowrap; }
+  .nome-cell { font-family:'IBM Plex Sans',sans-serif; font-weight:700; }
+  .pick-livre { color:#90caf9; }
+  .cell-hit { color:var(--verde); font-weight:700; }
+  .cell-miss { color:var(--muted); }
+  .pts-tag { font-size:.65rem; color:var(--verde); margin-left:.35rem; }
+
+  .lock-box { background:rgba(255,214,0,.06); border:1px solid rgba(255,214,0,.3); padding:2.5rem 1.5rem; text-align:center; font-family:'IBM Plex Mono',monospace; line-height:1.8; }
+  .lock-emoji { font-size:2.5rem; display:block; margin-bottom:1rem; }
+  .lock-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--amarelo); letter-spacing:.05em; }
+  .lock-text { font-size:.85rem; color:var(--text); margin-top:.75rem; }
+
+  .loader { display:flex; align-items:center; justify-content:center; padding:4rem; gap:1rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+  .spinner { width:20px;height:20px; border:2px solid var(--border); border-top-color:var(--amarelo); border-radius:50%; animation:spin .8s linear infinite; }
+  @keyframes spin { to{transform:rotate(360deg);} }
+  .error-box { background:rgba(213,0,0,.1); border:1px solid rgba(213,0,0,.3); padding:1.5rem; color:#ff6b6b; font-family:'IBM Plex Mono',monospace; font-size:.85rem; }
+  .fi { vertical-align:middle; border-radius:2px; box-shadow:0 0 0 1px rgba(255,255,255,0.1); }
+  footer { text-align:center;padding:2rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.7rem;border-top:1px solid var(--border);margin-top:3rem; }
+  @media(max-width:600px){ header{padding:1rem;} main{padding:1rem;} .logo-title{font-size:1.6rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-title">⚽ Bolão Pistolando™</span>
+      <span class="logo-sub">NAFTA Edition 2026 · Soccer Fofo</span>
+    </div>
+    <nav>
+      <a href="index.html">Ranking</a>
+      <a href="jogos.html">Jogos</a>
+      <a href="extras.html" class="active">Bônus</a>
+      <a href="palpitar.html">Palpitar</a>
+      <a href="regulamento.html">Regulamento</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h2 class="section-title">🎯 Palpites de Bônus</h2>
+  <p class="subtitle">Quem apostou em quê para artilheiro, favorito eliminado, zebra classificada, melhor ataque e melhor defesa.</p>
+  <div id="app">
+    <div class="loader"><div class="spinner"></div> Carregando bônus...</div>
+  </div>
+</main>
+
+<footer>Bolão Pistolando™ NAFTA Edition 2026 · Soccer Fofo</footer>
+
+<script src="engine.js"></script>
+<script>
+const FLAGS = {
+  'México':'mx','África do Sul':'za','Coreia do Sul':'kr','Tchéquia':'cz',
+  'Canadá':'ca','Bósnia-Herz.':'ba','Estados Unidos':'us','Paraguai':'py',
+  'Austrália':'au','Turquia':'tr','Catar':'qa','Suíça':'ch','Brasil':'br',
+  'Marrocos':'ma','Haiti':'ht','Escócia':'gb-sct','Alemanha':'de','Curaçao':'cw',
+  'Países Baixos':'nl','Japão':'jp','Costa do Marfim':'ci','Equador':'ec',
+  'Suécia':'se','Tunísia':'tn','Espanha':'es','Cabo Verde':'cv','Bélgica':'be',
+  'Egito':'eg','Arábia Saudita':'sa','Uruguai':'uy','Irã':'ir',
+  'Nova Zelândia':'nz','França':'fr','Senegal':'sn','Iraque':'iq','Noruega':'no',
+  'Argentina':'ar','Argélia':'dz','Áustria':'at','Jordânia':'jo','Portugal':'pt',
+  'RD Congo':'cd','Inglaterra':'gb-eng','Croácia':'hr','Gana':'gh',
+  'Panamá':'pa','Uzbequistão':'uz','Colômbia':'co',
+};
+function flagTeam(nome) {
+  if (!nome) return '<span class="cell-miss">—</span>';
+  const code = FLAGS[nome];
+  return code ? `<span class="fi fi-${code}"></span> ${nome}` : nome;
+}
+const PTS_ZEBRA = { '1':30, '2':20, '3':10 };
+
+async function init() {
+  const app = document.getElementById('app');
+  try {
+    const E = window.BolaoEngine;
+    const [dados, resultadosData, idx] = await Promise.all([
+      E.fetchJSON('data/jogos.json'),
+      E.fetchJSON('data/resultados.json'),
+      E.fetchJSON('data/palpites/index.json'),
+    ]);
+
+    const inicioCopa = dados.jogos.length ? Math.min(...dados.jogos.map(j => new Date(j.data).getTime())) : Infinity;
+
+    // Trava anti-cópia: bônus de todos ocultos até o primeiro jogo
+    if (Date.now() < inicioCopa) {
+      const dataIni = new Date(inicioCopa).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+      app.innerHTML = `<div class="lock-box">
+        <span class="lock-emoji">🔒</span>
+        <div class="lock-title">Bônus ocultos até o início da Copa</div>
+        <div class="lock-text">Os palpites de bônus de <strong>todos</strong> só aparecem a partir de<br>${dataIni} (México × África do Sul).<br><br>É pra garantir a lisura: ninguém copia o artilheiro, a zebra ou o favorito de ninguém antes da bola rolar.</div>
+      </div>`;
+      return;
+    }
+
+    const participantes = await Promise.all(idx.map(arq => E.fetchJSON('data/palpites/' + arq)));
+    const rExtras = resultadosData.extras || {};
+    const temGabarito = rExtras && (rExtras.artilheiro || (rExtras.favoritos_eliminados && rExtras.favoritos_eliminados.length) || (rExtras.zebra_posicoes && Object.keys(rExtras.zebra_posicoes).length) || rExtras.melhor_ataque || rExtras.melhor_defesa);
+
+    if (participantes.length === 0) {
+      app.innerHTML = `<div class="error-box">Nenhum palpite encontrado ainda.</div>`;
+      return;
+    }
+
+    // célula de time com marcação de acerto/pontos (se houver gabarito)
+    function cellTime(pick, correto, pts) {
+      if (!pick) return '<span class="cell-miss">—</span>';
+      let html = flagTeam(pick);
+      if (temGabarito) {
+        if (correto) html = `<span class="cell-hit">✓ ${flagTeam(pick)}</span>` + (pts ? `<span class="pts-tag">+${pts}</span>` : '');
+        else html = `<span class="cell-miss">${flagTeam(pick)}</span>`;
+      }
+      return html;
+    }
+
+    let html = `<div class="tabela-wrap"><table>
+      <thead><tr>
+        <th>Participante</th>
+        <th>⚽ Artilheiro</th>
+        <th>🏆 Favorito eliminado</th>
+        <th>🐴 Zebra classificada</th>
+        <th>🗡️ Melhor ataque</th>
+        <th>🛡️ Melhor defesa</th>
+      </tr></thead><tbody>`;
+
+    participantes.forEach(p => {
+      const e = p.extras || {};
+      // artilheiro (livre)
+      let artHtml = e.artilheiro ? `<span class="pick-livre">${e.artilheiro}</span>` : '<span class="cell-miss">—</span>';
+      if (temGabarito && e.artilheiro && rExtras.artilheiro && e.artilheiro === rExtras.artilheiro) artHtml = `<span class="cell-hit">✓ ${e.artilheiro}</span><span class="pts-tag">+15</span>`;
+
+      const favOk = temGabarito && e.favorito_eliminado && (rExtras.favoritos_eliminados || []).includes(e.favorito_eliminado);
+      const zebPos = (rExtras.zebra_posicoes || {})[e.zebra_classificada];
+      const zebPts = zebPos != null ? PTS_ZEBRA[zebPos] : 0;
+      const ataOk = temGabarito && e.melhor_ataque && e.melhor_ataque === rExtras.melhor_ataque;
+      const defOk = temGabarito && e.melhor_defesa && e.melhor_defesa === rExtras.melhor_defesa;
+
+      html += `<tr>
+        <td class="nome-cell">${p.nome}</td>
+        <td>${artHtml}</td>
+        <td>${cellTime(e.favorito_eliminado, favOk, 10)}</td>
+        <td>${cellTime(e.zebra_classificada, zebPos != null, zebPts)}</td>
+        <td>${cellTime(e.melhor_ataque, ataOk, 10)}</td>
+        <td>${cellTime(e.melhor_defesa, defOk, 10)}</td>
+      </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+    html += `<p class="subtitle" style="margin-top:1rem">Artilheiro, ataque e defesa são de escolha livre. Favorito (10 pts) e zebra (10/20/30 pts conforme a colocação) saem da lista da planilha. A pontuação final entra no ranking ao fim da fase de grupos.</p>`;
+    app.innerHTML = html;
+
+  } catch (err) {
+    app.innerHTML = `<div class="error-box"><strong>Erro ao carregar bônus</strong><br><br>${err.message}</div>`;
+  }
+}
+init();
+</script>
+</body>
+</html>
