@@ -151,12 +151,12 @@ function calcularExtras(extras, resultadosExtras, pontosExtras) {
 }
 
 async function calcularRanking() {
-  const [dadosJogos, resultadosData, palpitesIndex] = await Promise.all([
+  const [dadosJogos, palpitesIndex] = await Promise.all([
     fetchJSON('data/jogos.json'),
-    fetchJSON('data/resultados.json'),
     fetchJSON('data/palpites/index.json'),
   ]);
 
+  const resultadosData = await fetchResultados(dadosJogos.jogos); // busca repo + mescla API
   const anfitriaoBest = resultadosData._anfitriao_melhor_campanha;
   const resultados = resultadosData.resultados || {};
   const resultadosExtras = resultadosData.extras || null;
@@ -234,3 +234,102 @@ async function calcularRanking() {
 }
 
 window.BolaoEngine = { calcularRanking, fetchJSON, REPO_RAW, palpitesVisiveis, fatorDuplicacao };
+
+async function fetchResultados(meusJogos) {
+  // Busca em paralelo: repositório + API externa
+  const [resultadosData, apiResp] = await Promise.all([
+    fetchJSON('data/resultados.json'),
+    fetch('https://worldcup26.ir/get/games').catch(() => null),
+  ]);
+ 
+  // Se a API respondeu, mescla — repositório preservado como base (manuais de mata-mata etc.)
+  if (apiResp?.ok) {
+    try {
+      const { games } = await apiResp.json();
+      const doApi = correlacionarResultados(meusJogos, games);
+      resultadosData.resultados = {
+        ...resultadosData.resultados,  // mantém manuais (penaltis, mata-mata)
+        ...doApi,                      // sobrescreve com o que veio da API
+      };
+    } catch (e) {
+      console.warn('[fetchResultados] Falha ao processar API externa, usando só o repositório.', e);
+    }
+  }
+ 
+  return resultadosData;
+}
+
+function correlacionarResultados(meusJogos, apiGames, nomeMap = NOMES_EN_PT) {
+  const indiceApi = {};
+  for (const jogo of apiGames) {
+    if(jogo.time_elapsed == "notstarted") continue;
+    const casaPT = nomeMap[jogo.home_team_name_en];
+    const foraPT = nomeMap[jogo.away_team_name_en];
+    if (!casaPT || !foraPT) {
+      console.warn(`[correlacionar] Time sem mapeamento: "${jogo.home_team_name_en}" ou "${jogo.away_team_name_en}"`);
+      continue;
+    }
+    indiceApi[`${casaPT}|${foraPT}`] = {
+      gols_casa: parseInt(jogo.home_score, 10),
+      gols_fora: parseInt(jogo.away_score, 10),
+    };
+  }
+ 
+  const resultados = {};
+  for (const jogo of meusJogos) {
+    const entry = indiceApi[`${jogo.casa}|${jogo.fora}`];
+    if (entry) resultados[String(jogo.id)] = entry;
+  }
+  return resultados;
+}
+
+const NOMES_EN_PT = {
+  "Mexico": "México",
+  "South Africa": "África do Sul",
+  "South Korea": "Coreia do Sul",
+  "Czech Republic": "Tchéquia",
+  "Canada": "Canadá",
+  "Bosnia and Herzegovina": "Bósnia-Herz.",
+  "United States": "Estados Unidos",
+  "Paraguay": "Paraguai",
+  "Australia": "Austrália",
+  "Turkey": "Turquia",
+  "Qatar": "Catar",
+  "Switzerland": "Suíça",
+  "Brazil": "Brasil",
+  "Morocco": "Marrocos",
+  "Haiti": "Haiti",
+  "Scotland": "Escócia",
+  "Germany": "Alemanha",
+  "Curaçao": "Curaçao",
+  "Netherlands": "Países Baixos",
+  "Japan": "Japão",
+  "Ivory Coast": "Costa do Marfim",
+  "Ecuador": "Equador",
+  "Sweden": "Suécia",
+  "Tunisia": "Tunísia",
+  "Spain": "Espanha",
+  "Cape Verde": "Cabo Verde",
+  "Belgium": "Bélgica",
+  "Egypt": "Egito",
+  "Saudi Arabia": "Arábia Saudita",
+  "Uruguay": "Uruguai",
+  "Iran": "Irã",
+  "New Zealand": "Nova Zelândia",
+  "France": "França",
+  "Senegal": "Senegal",
+  "Iraq": "Iraque",
+  "Norway": "Noruega",
+  "Argentina": "Argentina",
+  "Algeria": "Argélia",
+  "Austria": "Áustria",
+  "Jordan": "Jordânia",
+  "Portugal": "Portugal",
+  "Democratic Republic of the Congo": "RD Congo",
+  "England": "Inglaterra",
+  "Croatia": "Croácia",
+  "Ghana": "Gana",
+  "Panama": "Panamá",
+  "Uzbekistan": "Uzbequistão",
+  "Colombia": "Colômbia",
+};
