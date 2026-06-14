@@ -100,7 +100,7 @@
     {"id": 2,  "fase": "grupos", "grupo": "A", "data": "2026-06-11T23:00:00-03:00", "casa": "Coreia do Sul",  "fora": "Tchéquia",          "sede": "Guadalajara",      "duplicado": false},
     {"id": 3,  "fase": "grupos", "grupo": "B", "data": "2026-06-12T16:00:00-03:00", "casa": "Canadá",         "fora": "Bósnia-Herz.",      "sede": "Toronto",          "duplicado": false},
     {"id": 4,  "fase": "grupos", "grupo": "D", "data": "2026-06-12T22:00:00-03:00", "casa": "Estados Unidos", "fora": "Paraguai",          "sede": "Los Angeles",      "duplicado": false},
-    {"id": 5,  "fase": "grupos", "grupo": "C", "data": "2026-06-14T01:00:00-03:00", "casa": "Austrália",      "fora": "Turquia",           "sede": "Vancouver",        "duplicado": false},
+    {"id": 5,  "fase": "grupos", "grupo": "D", "data": "2026-06-14T01:00:00-03:00", "casa": "Austrália",      "fora": "Turquia",           "sede": "Vancouver",        "duplicado": false},
     {"id": 6,  "fase": "grupos", "grupo": "B", "data": "2026-06-13T16:00:00-03:00", "casa": "Catar",          "fora": "Suíça",             "sede": "São Francisco",    "duplicado": false},
     {"id": 7,  "fase": "grupos", "grupo": "C", "data": "2026-06-13T19:00:00-03:00", "casa": "Brasil",         "fora": "Marrocos",          "sede": "Nova York",        "duplicado": true,  "motivo_duplicado": "brasil"},
     {"id": 8,  "fase": "grupos", "grupo": "C", "data": "2026-06-13T22:00:00-03:00", "casa": "Haiti",          "fora": "Escócia",           "sede": "Boston",           "duplicado": false},
