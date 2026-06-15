@@ -48,7 +48,7 @@
 
   .jogo-card {
     background:var(--card); border:1px solid var(--border); padding:1rem 1.25rem;
-    position:relative; overflow:hidden; transition:border-color .15s;
+    position:relative; overflow:hidden; transition:border-color .15s; cursor:pointer;
   }
   .jogo-card:hover { border-color:#333; }
   .jogo-card.tem-resultado { border-left:3px solid var(--verde); }
@@ -68,6 +68,71 @@
   .jogo-resultado { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.05em; color:var(--amarelo); }
   .jogo-sede { font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--muted); margin-top:.25rem; }
   .jogo-pen { font-size:.7rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+
+  .jogo-hint {
+    font-family:'IBM Plex Mono',monospace; font-size:.6rem; color:#444; margin-top:.4rem; letter-spacing:.08em;
+  }
+
+  /* MODAL */
+  #modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; z-index:1000; padding:1rem;
+  }
+  #modal-card {
+    background:var(--card); border:1px solid #333; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; position:relative;
+  }
+  .modal-close {
+    position:absolute; top:.75rem; right:.75rem; background:none; border:none; color:var(--muted); cursor:pointer; font-size:1.4rem; line-height:1; padding:.25rem .5rem; transition:color .15s;
+  }
+  .modal-close:hover { color:var(--text); }
+  .modal-header {
+    padding:1.25rem 1.25rem 1rem; border-bottom:1px solid var(--border);
+  }
+  .modal-jogo-meta {
+    font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:.5rem;
+  }
+  .modal-jogo-times {
+    font-size:1.05rem; font-weight:700; display:flex; align-items:center; gap:.5rem; margin-bottom:.25rem;
+  }
+  .modal-vs {
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--muted); flex-shrink:0;
+  }
+  .modal-resultado {
+    font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--amarelo); letter-spacing:.05em; margin-top:.15rem;
+  }
+  .modal-sede {
+    font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--muted); margin-top:.35rem;
+  }
+  .modal-aviso {
+    padding:1.25rem; font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--muted); line-height:1.6;
+  }
+  .modal-palpites { padding:.25rem 0; }
+  .modal-palpite-row {
+    display:flex; align-items:center; gap:.75rem; padding:.75rem 1.25rem; border-bottom:1px solid var(--border);
+  }
+  .modal-palpite-row:last-child { border-bottom:none; }
+  .modal-nome {
+    flex:1; font-weight:700; font-size:.9rem; min-width:0;
+  }
+  .modal-bet {
+    font-family:'IBM Plex Mono',monospace; font-size:1rem; font-weight:600; white-space:nowrap;
+  }
+  .modal-pts {
+    font-family:'IBM Plex Mono',monospace; font-size:.85rem; font-weight:700; white-space:nowrap;
+  }
+  .pts-pos { color:var(--verde); }
+  .pts-neg { color:var(--vermelho); }
+  .pts-zero { color:var(--muted); }
+  .modal-tipo {
+    font-family:'IBM Plex Mono',monospace; font-size:.62rem; padding:.1rem .4rem; border-radius:2px; white-space:nowrap;
+  }
+  .tipo-cravada, .tipo-empate_cravado { background:rgba(0,200,83,0.15); color:var(--verde); border:1px solid rgba(0,200,83,0.3); }
+  .tipo-cravada_invertida { background:rgba(213,0,0,0.15); color:var(--vermelho); border:1px solid rgba(213,0,0,0.3); }
+  .tipo-vencedor { background:rgba(30,80,180,0.25); color:#90caf9; border:1px solid rgba(30,80,180,0.4); }
+  .tipo-gols_parcial, .tipo-empate_gols { background:rgba(255,214,0,0.1); color:var(--amarelo); border:1px solid rgba(255,214,0,0.25); }
+  .tipo-erro { color:var(--muted); }
+  .modal-sem-palpite {
+    color:var(--muted); font-family:'IBM Plex Mono',monospace;
+  }
 
   .filtro-bar { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
   .filtro-btn {
@@ -113,6 +178,14 @@
 
 <footer>Bolão Pistolando™ NAFTA Edition 2026</footer>
 
+<!-- Modal de palpites -->
+<div id="modal-overlay" onclick="if(event.target===this)fecharModal()">
+  <div id="modal-card">
+    <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script src="engine.js"></script>
 <script>
 // Bandeiras — definido localmente, não depende de cache do engine.js
@@ -142,6 +215,7 @@ const FASE_LABELS = {
 const ANFITRIOES = ['Estados Unidos','Canadá','México'];
 
 let todosJogos = [], todosResultados = {}, anfitriaoBest = null;
+let allRanking = [], allParticipantes = [];
 let filtroAtivo = 'todos';
 
 // Times efetivos: no mata-mata os nomes reais vêm do resultado quando preenchidos
@@ -163,6 +237,101 @@ function fatorJogo(jogo) {
   const res = todosResultados[String(jogo.id)];
   return window.BolaoEngine.fatorDuplicacao(jogo, res, anfitriaoBest);
 }
+
+// Início da Copa = horário do primeiro jogo (México × África do Sul)
+function inicioCopa() {
+  if (!Array.isArray(todosJogos) || todosJogos.length === 0) return Infinity;
+  return Math.min(...todosJogos.map(j => new Date(j.data).getTime()));
+}
+
+function palpitesVisiveis(jogo) {
+  const idStr = String(jogo.id);
+  const agora = Date.now();
+  // Trava global: nada visível antes do primeiro jogo da Copa (anti-cópia)
+  if (agora < inicioCopa()) return false;
+  const jogoTime = new Date(jogo.data).getTime();
+  if (agora >= jogoTime - 600000) return true;
+  if (!Array.isArray(allParticipantes) || allParticipantes.length === 0) return false;
+  return allParticipantes.every(p => p.palpites?.[idStr] !== undefined);
+}
+
+const TIPO_LABEL = {
+  cravada: 'cravada', empate_cravado: 'cravada',
+  cravada_invertida: 'invertida',
+  vencedor: 'vencedor',
+  gols_parcial: 'gols', empate_gols: 'gols',
+  erro: 'erro',
+};
+
+function abrirPalpites(jogoId) {
+  const jogo = todosJogos.find(j => j.id === jogoId);
+  if (!jogo) return;
+  const idStr = String(jogoId);
+  const res = todosResultados[idStr];
+  const temRes = res && res.gols_casa !== null && res.gols_casa !== undefined;
+  const visivel = palpitesVisiveis(jogo);
+
+  const dataFmt = new Date(jogo.data).toLocaleString('pt-BR', {
+    weekday: 'short', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
+  });
+
+  const { casa, fora } = timesDoJogo(jogo);
+  let html = `<div class="modal-header">
+    <div class="modal-jogo-meta">${jogo.grupo ? 'Grupo ' + jogo.grupo : jogo.fase} · #${jogo.id} · ${dataFmt}</div>
+    <div class="modal-jogo-times">
+      <span>${flagTeam(casa)}</span>
+      <span class="modal-vs">×</span>
+      <span>${flagTeam(fora)}</span>
+    </div>
+    ${temRes ? `<div class="modal-resultado">${res.gols_casa} – ${res.gols_fora}${res.penaltis_vencedor ? ' <small style="font-size:.8rem;color:var(--muted)">(pen: ' + res.penaltis_vencedor + ')</small>' : ''}</div>` : ''}
+    <div class="modal-sede">📍 ${jogo.sede}</div>
+  </div>`;
+
+  if (!visivel) {
+    const agora = Date.now();
+    const ini = inicioCopa();
+    if (agora < ini) {
+      const dataIni = new Date(ini).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+      html += `<div class="modal-aviso">🔒 Os palpites de <strong>todos</strong> ficam ocultos até o início da Copa<br>(${dataIni} — México × África do Sul).<br><br>É pra garantir a lisura: ninguém copia de ninguém antes da bola rolar.</div>`;
+    } else {
+      const jogoTime = new Date(jogo.data).getTime();
+      const faltam = jogoTime - Date.now() - 600000;
+      const h = Math.floor(faltam / 3600000);
+      const m = Math.floor((faltam % 3600000) / 60000);
+      const tempoStr = h >= 24 ? `${Math.floor(h/24)}d ${h%24}h` : h > 0 ? `${h}h ${m}min` : `${m}min`;
+      html += `<div class="modal-aviso">🔒 Palpites revelados 10min antes do início ou quando todos enviarem.<br><br><span style="font-size:.7rem">Disponíveis em: ${tempoStr}</span></div>`;
+    }
+  } else {
+    html += `<div class="modal-palpites">`;
+    allParticipantes.forEach(p => {
+      const palpite = p.palpites?.[idStr];
+      const detalhe = allRanking.find(r => r.nome === p.nome)?.detalheJogos?.[idStr];
+      html += `<div class="modal-palpite-row"><span class="modal-nome">${p.nome}</span>`;
+      if (palpite !== undefined) {
+        html += `<span class="modal-bet">${palpite.gols_casa} – ${palpite.gols_fora}</span>`;
+        if (detalhe) {
+          const ptsClass = detalhe.pts > 0 ? 'pts-pos' : detalhe.pts < 0 ? 'pts-neg' : 'pts-zero';
+          const label = TIPO_LABEL[detalhe.tipo] || '';
+          html += `<span class="modal-pts ${ptsClass}">${detalhe.pts > 0 ? '+' : ''}${detalhe.pts.toFixed(1)}</span>`;
+          if (label) html += `<span class="modal-tipo tipo-${detalhe.tipo}">${label}</span>`;
+        }
+      } else {
+        html += `<span class="modal-sem-palpite">—</span>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal-overlay').style.display = 'flex';
+}
+
+function fecharModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
 
 function renderJogos() {
   const app = document.getElementById('app');
@@ -226,7 +395,7 @@ function renderJogos() {
           weekday:'short', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'
         });
 
-        html += `<div class="jogo-card ${cardClass}">`;
+        html += `<div class="jogo-card ${cardClass}" onclick="abrirPalpites(${jogo.id})">`;
         if (fator > 1) html += `<span class="duplo-badge d">${fator}×</span>`;
         else if (potD) html += `<span class="duplo-badge p">2×?</span>`;
         html += `<div class="jogo-meta">#${jogo.id} · ${dataFmt}</div>`;
@@ -236,6 +405,7 @@ function renderJogos() {
           if (res.penaltis_vencedor) html += `<div class="jogo-pen">Pênaltis: ${res.penaltis_vencedor}</div>`;
         }
         html += `<div class="jogo-sede">📍 ${jogo.sede}</div>`;
+        if (palpitesVisiveis(jogo)) html += `<div class="jogo-hint">clique para ver palpites</div>`;
         html += `</div>`;
       });
       html += `</div>`;
@@ -257,14 +427,24 @@ function setFiltro(f) {
 async function init() {
   const app = document.getElementById('app');
   try {
-    const [dados, resultadosData] = await Promise.all([
-      window.BolaoEngine.fetchJSON('data/jogos.json'),
-      window.BolaoEngine.fetchJSON('data/resultados.json'),
-    ]);
-    todosJogos = dados.jogos;
-    todosResultados = resultadosData.resultados || {};
-    anfitriaoBest = resultadosData._anfitriao_melhor_campanha || null;
-    renderJogos();
+    // Reutiliza dados de index.html se já estão carregados (evita múltiplos fetches)
+    if (window.allJogos && window.allResultados !== undefined && window.allRanking && window.allParticipantes !== undefined) {
+      todosJogos = window.allJogos;
+      todosResultados = window.allResultados;
+      anfitriaoBest = window.allAnfitriaoBest || null;
+      allRanking = window.allRanking;
+      allParticipantes = window.allParticipantes;
+      renderJogos();
+    } else {
+      // Carrega dados do zero se não disponíveis (acesso direto a jogos.html)
+      const rankingData = await window.BolaoEngine.calcularRanking();
+      todosJogos = rankingData.jogos;
+      todosResultados = rankingData.resultados || {};
+      anfitriaoBest = rankingData.anfitriaoBest || null;
+      allRanking = rankingData.ranking || [];
+      allParticipantes = Array.isArray(rankingData.participantes) ? rankingData.participantes : [];
+      renderJogos();
+    }
   } catch(err) {
     app.innerHTML = `<div style="background:rgba(213,0,0,.1);border:1px solid rgba(213,0,0,.3);padding:1.5rem;color:#ff6b6b;font-family:'IBM Plex Mono',monospace;font-size:.85rem">${err.message}</div>`;
   }

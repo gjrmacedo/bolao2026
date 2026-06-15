@@ -646,7 +646,25 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(
 async function render() {
   const app = document.getElementById('app');
   try {
-    const { ranking, jogos, resultados, anfitriaoBest, participantes } = await window.BolaoEngine.calcularRanking();
+    // Guard: reutiliza dados já carregados se existirem (evita múltiplos fetches)
+    let ranking, jogos, resultados, anfitriaoBest, participantes;
+    
+    if (window.allJogos && window.allResultados !== undefined && window.allRanking && window.allParticipantes !== undefined) {
+      // Dados já foram carregados
+      ranking = window.allRanking;
+      jogos = window.allJogos;
+      resultados = window.allResultados;
+      anfitriaoBest = window.allAnfitriaoBest || null;
+      participantes = window.allParticipantes;
+    } else {
+      // Primeiro carregamento
+      const data = await window.BolaoEngine.calcularRanking();
+      ranking = data.ranking;
+      jogos = data.jogos;
+      resultados = data.resultados;
+      anfitriaoBest = data.anfitriaoBest || null;
+      participantes = data.participantes;
+    }
 
     allRanking = ranking;
     allParticipantes = Array.isArray(participantes) ? participantes : [];
@@ -785,6 +803,13 @@ async function render() {
     }
 
     app.innerHTML = html;
+
+    // Compartilha dados com outras páginas (jogos.html pode reusar)
+    window.allJogos = jogos;
+    window.allResultados = resultados;
+    window.allAnfitriaoBest = anfitriaoBest || null;
+    window.allRanking = ranking;
+    window.allParticipantes = participantes;
 
   } catch (err) {
     app.innerHTML = `<div class="error-box">
