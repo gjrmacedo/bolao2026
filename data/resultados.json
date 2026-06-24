@@ -40,7 +40,18 @@
     "34" : {  "gols_casa": 0,  "gols_fora": 0},
     "35" : {  "gols_casa": 5,  "gols_fora": 1},
     "36" : {  "gols_casa": 0,  "gols_fora": 4},
-    "38" : {  "gols_casa": 4,  "gols_fora": 0}
+    "37" : {  "gols_casa": 2,  "gols_fora": 2},
+    "38" : {  "gols_casa": 4,  "gols_fora": 0},
+    "39" : {  "gols_casa": 0,  "gols_fora": 0},
+    "40" : {  "gols_casa": 1,  "gols_fora": 3},
+    "41" : {  "gols_casa": 3,  "gols_fora": 2},
+    "42" : {  "gols_casa": 3,  "gols_fora": 0},
+    "43" : {  "gols_casa": 2,  "gols_fora": 0},
+    "44" : {  "gols_casa": 1,  "gols_fora": 2},
+    "45" : {  "gols_casa": 5,  "gols_fora": 0},
+    "46" : {  "gols_casa": 0,  "gols_fora": 0},
+    "47" : {  "gols_casa": 0,  "gols_fora": 1},
+    "48" : {  "gols_casa": 1,  "gols_fora": 0}
   },
   "extras": {
     "melhor_ataque": null,
