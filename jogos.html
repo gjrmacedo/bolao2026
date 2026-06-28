@@ -308,7 +308,10 @@ function abrirPalpites(jogoId) {
       const detalhe = allRanking.find(r => r.nome === p.nome)?.detalheJogos?.[idStr];
       html += `<div class="modal-palpite-row"><span class="modal-nome">${p.nome}</span>`;
       if (palpite !== undefined) {
-        html += `<span class="modal-bet">${palpite.gols_casa} – ${palpite.gols_fora}</span>`;
+        const penPalpite = palpite.penaltis_vencedor
+          ? ` <small style="color:var(--muted)">*${palpite.penaltis_vencedor}</small>`
+          : '';
+        html += `<span class="modal-bet">${palpite.gols_casa} – ${palpite.gols_fora}${penPalpite}</span>`;
         if (detalhe) {
           const ptsClass = detalhe.pts > 0 ? 'pts-pos' : detalhe.pts < 0 ? 'pts-neg' : 'pts-zero';
           const label = TIPO_LABEL[detalhe.tipo] || '';

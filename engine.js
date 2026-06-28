@@ -87,8 +87,10 @@ function calcularPontosMataM(palpite, resultado, regras) {
           pts += regras.penaltis_erro; // já é negativo no JSON
         }
       }
+    } else if (pc === rc || pf === rf) {
+      // Apostou vitória, resultado foi empate — consolação por gol certo
+      pts = regras.vitoria_gols; tipo = 'gols_parcial';
     }
-    // Apostou vitória mas o jogo terminou empatado → erro (0 pts), sem bônus de pênaltis
   }
 
   return { pts, tipo };
