@@ -288,6 +288,86 @@
                      "68":  {
                                 "gols_casa":  2,
                                 "gols_fora":  0
+                            },
+                     "73":  {
+                                "gols_casa":  1,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "74":  {
+                                "gols_casa":  3,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  null
+                            },
+                     "75":  {
+                                "gols_casa":  1,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  null
+                            },
+                     "76":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "77":  {
+                                "gols_casa":  3,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  null
+                            },
+                     "78":  {
+                                "gols_casa":  2,
+                                "gols_fora":  3,
+                                "penaltis_vencedor":  null
+                            },
+                     "79":  {
+                                "gols_casa":  1,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "80":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "81":  {
+                                "gols_casa":  2,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  null
+                            },
+                     "82":  {
+                                "gols_casa":  1,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  null
+                            },
+                     "83":  {
+                                "gols_casa":  2,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "84":  {
+                                "gols_casa":  2,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "85":  {
+                                "gols_casa":  1,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "86":  {
+                                "gols_casa":  2,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "87":  {
+                                "gols_casa":  1,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  null
+                            },
+                     "88":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Austrália"
                             }
                  },
     "extras":  {
