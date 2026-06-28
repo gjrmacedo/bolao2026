@@ -54,10 +54,10 @@
     "48" : {  "gols_casa": 1,  "gols_fora": 0}
   },
   "extras": {
-    "melhor_ataque": null,
-    "melhor_defesa": null,
-    "artilheiro": null,
+    "melhor_ataque": "França",
+    "melhor_defesa": "Espanha",
+    "artilheiro": "Messi",
     "favoritos_eliminados": [],
-    "zebra_posicoes": {}
+    "zebra_posicoes": {"África do Sul": 2, "Bósnia-Herz.": 3, "Paraguai": 3,  "Cabo Verde": 2}
   }
 }
