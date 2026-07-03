@@ -365,9 +365,9 @@
                                 "penaltis_vencedor":  null
                             },
                      "88":  {
-                                "gols_casa":  1,
+                                "gols_casa":  0,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Austrália"
+                                "penaltis_vencedor":  null
                             }
                  },
     "extras":  {
