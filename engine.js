@@ -54,8 +54,9 @@ function calcularPontosGrupos(palpite, resultado) {
 function calcularPontosMataM(palpite, resultado, regras) {
   const pc = palpite.gols_casa, pf = palpite.gols_fora;
   const rc = resultado.gols_casa, rf = resultado.gols_fora;
+  const rpenc = resultado.gols_penalti_casa, rpenf = resultado.gols_penalti_fora;
 
-  let pts = 0, tipo = 'erro';
+  let pts = 0, tipo = 'erro', penaltis_vencedor;
 
   if (rc !== rf) {
     // Vitória no tempo normal/prorrogação
@@ -78,15 +79,19 @@ function calcularPontosMataM(palpite, resultado, regras) {
       } else {
         pts = regras.empate_gols; tipo = 'empate_gols';
       }
-
-      // Bônus/penalidade dos pênaltis (só para quem apostou empate)
-      if (resultado.penaltis_vencedor && palpite.penaltis_vencedor) {
-        if (palpite.penaltis_vencedor === resultado.penaltis_vencedor) {
-          pts += regras.penaltis_acerto;
-        } else {
-          pts += regras.penaltis_erro; // já é negativo no JSON
-        }
+      
+      if (rpenc > rpenf) {
+          penaltis_vencedor = 'casa';
+      } else {
+          penaltis_vencedor = 'fora';
       }
+      // Bônus/desconto dos pênaltis (só para quem apostou empate)
+      if (penaltis_vencedor === palpite.penaltis_vencedor) {
+        pts += regras.penaltis_acerto; tipo += '_acerto_penal';
+      } else {
+          pts += regras.penaltis_erro; tipo += '_erro_penal'; // já é negativo no JSON
+      }
+    
     } else if (pc === rc || pf === rf) {
       // Apostou vitória, resultado foi empate — consolação por gol certo
       pts = regras.vitoria_gols; tipo = 'gols_parcial';
@@ -274,6 +279,8 @@ function correlacionarResultados(meusJogos, apiGames, nomeMap = NOMES_EN_PT) {
     indiceApi[`${casaPT}|${foraPT}`] = {
       gols_casa: parseInt(jogo.home_score, 10),
       gols_fora: parseInt(jogo.away_score, 10),
+      gols_penalti_casa: parseInt(jogo.home_penalty_score, 10),
+      gols_penalti_fora: parseInt(jogo.away_penalty_score, 10),
     };
   }
  
