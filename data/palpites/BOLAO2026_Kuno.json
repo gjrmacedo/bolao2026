@@ -368,6 +368,46 @@
                                 "gols_casa":  1,
                                 "gols_fora":  3,
                                 "penaltis_vencedor":  null
+                            },
+                     "89":  {
+                                "gols_casa":  1,
+                                "gols_fora":  4,
+                                "penaltis_vencedor":  null
+                            },
+                     "90":  {
+                                "gols_casa":  2,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  "Marrocos"
+                            },
+                     "91":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Brasil"
+                            },
+                     "92":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "México"
+                            },
+                     "93":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Portugal"
+                            },
+                     "94":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Estados Unidos"
+                            },
+                     "95":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Argentina"
+                            },
+                     "96":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Suíça"
                             }
                  },
     "extras":  {

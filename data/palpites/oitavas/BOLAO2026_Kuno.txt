@@ -1,0 +1,8 @@
+JOGO 89: Paraguai 1 x 4 França
+JOGO 90: Canadá 2 x 2 Marrocos*
+JOGO 91: Brasil* 0 x 0 Noruega
+JOGO 92: México* 0 x 0 Inglaterra
+JOGO 93: Portugal* 0 x 0 Espanha
+JOGO 94: Estados Unidos* 0 x 0 Bélgica
+JOGO 95: Argentina* 0 x 0 Egito
+JOGO 96: Suíça* 0 x 0 Colômbia

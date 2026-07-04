@@ -367,7 +367,47 @@
                      "88":  {
                                 "gols_casa":  0,
                                 "gols_fora":  1,
-                                "penaltis_vencedor": null
+                                "penaltis_vencedor":  null
+                            },
+                     "89":  {
+                                "gols_casa":  0,
+                                "gols_fora":  3,
+                                "penaltis_vencedor":  null
+                            },
+                     "90":  {
+                                "gols_casa":  2,
+                                "gols_fora":  3,
+                                "penaltis_vencedor":  null
+                            },
+                     "91":  {
+                                "gols_casa":  1,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "92":  {
+                                "gols_casa":  2,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  null
+                            },
+                     "93":  {
+                                "gols_casa":  0,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  null
+                            },
+                     "94":  {
+                                "gols_casa":  1,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  null
+                            },
+                     "95":  {
+                                "gols_casa":  2,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  null
+                            },
+                     "96":  {
+                                "gols_casa":  2,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  "Suíça"
                             }
                  },
     "extras":  {

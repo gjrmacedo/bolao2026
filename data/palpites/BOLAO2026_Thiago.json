@@ -289,86 +289,126 @@
                                 "gols_casa":  3,
                                 "gols_fora":  3
                             },
-                    "73":  {
-                            "gols_casa":  1,
-                            "gols_fora":  3,
-                            "penaltis_vencedor": ""
-                        },
-                    "74":  {
-                            "gols_casa":  3,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "75":  {
-                            "gols_casa":  4,
-                            "gols_fora":  2,
-                            "penaltis_vencedor": ""
-                        },
-                    "76":  {
-                            "gols_casa":  2,
-                            "gols_fora":  1,
-                            "penaltis_vencedor": ""
-                        },
-                    "77":  {
-                            "gols_casa":  3,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "78":  {
-                            "gols_casa":  0,
-                            "gols_fora":  2,
-                            "penaltis_vencedor": ""
-                        },
-                    "79":  {
-                            "gols_casa":  2,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "80":  {
-                            "gols_casa":  4,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "81":  {
-                            "gols_casa":  2,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "82":  {
-                            "gols_casa":  1,
-                            "gols_fora":  1,
-                            "penaltis_vencedor": "Senegal"
-                        },
-                    "83":  {
-                            "gols_casa":  2,
-                            "gols_fora":  2,
-                            "penaltis_vencedor": "Portugal"
-                        },
-                    "84":  {
-                            "gols_casa":  3,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "85":  {
-                            "gols_casa":  3,
-                            "gols_fora":  1,
-                            "penaltis_vencedor": ""
-                        },
-                    "86":  {
-                            "gols_casa":  3,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": ""
-                        },
-                    "87":  {
-                            "gols_casa":  0,
-                            "gols_fora":  0,
-                            "penaltis_vencedor": "Colômbia"
-                        },
-                    "88":  {
-                            "gols_casa":  1,
-                            "gols_fora":  2,
-                            "penaltis_vencedor": ""
-                        }
+                     "73":  {
+                                "gols_casa":  1,
+                                "gols_fora":  3,
+                                "penaltis_vencedor":  ""
+                            },
+                     "74":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "75":  {
+                                "gols_casa":  4,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  ""
+                            },
+                     "76":  {
+                                "gols_casa":  2,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  ""
+                            },
+                     "77":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "78":  {
+                                "gols_casa":  0,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  ""
+                            },
+                     "79":  {
+                                "gols_casa":  2,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "80":  {
+                                "gols_casa":  4,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "81":  {
+                                "gols_casa":  2,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "82":  {
+                                "gols_casa":  1,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  "Senegal"
+                            },
+                     "83":  {
+                                "gols_casa":  2,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  "Portugal"
+                            },
+                     "84":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "85":  {
+                                "gols_casa":  3,
+                                "gols_fora":  1,
+                                "penaltis_vencedor":  ""
+                            },
+                     "86":  {
+                                "gols_casa":  3,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  ""
+                            },
+                     "87":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Colômbia"
+                            },
+                     "88":  {
+                                "gols_casa":  1,
+                                "gols_fora":  2,
+                                "penaltis_vencedor":  ""
+                            },
+                     "89":  {
+                                "gols_casa":  0,
+                                "gols_fora":  4,
+                                "penaltis_vencedor":  null
+                            },
+                     "90":  {
+                                "gols_casa":  1,
+                                "gols_fora":  3,
+                                "penaltis_vencedor":  null
+                            },
+                     "91":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Brasil"
+                            },
+                     "92":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "México"
+                            },
+                     "93":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Portugal"
+                            },
+                     "94":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Estados Unidos"
+                            },
+                     "95":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Argentina"
+                            },
+                     "96":  {
+                                "gols_casa":  0,
+                                "gols_fora":  0,
+                                "penaltis_vencedor":  "Suíça"
+                            }
                  },
     "extras":  {
                    "melhor_ataque":  "Portugal",
