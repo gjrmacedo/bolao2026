@@ -302,7 +302,7 @@
                      "75":  {
                                 "gols_casa":  2,
                                 "gols_fora":  2,
-                                "penaltis_vencedor":  "Países Baixos"
+                                "penaltis_vencedor":  "casa"
                             },
                      "76":  {
                                 "gols_casa":  2,
@@ -337,12 +337,12 @@
                      "82":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Bélgica"
+                                "penaltis_vencedor":  "casa"
                             },
                      "83":  {
                                 "gols_casa":  2,
                                 "gols_fora":  2,
-                                "penaltis_vencedor":  "Croácia"
+                                "penaltis_vencedor":  "fora"
                             },
                      "84":  {
                                 "gols_casa":  2,
@@ -387,7 +387,7 @@
                      "92":  {
                                 "gols_casa":  2,
                                 "gols_fora":  2,
-                                "penaltis_vencedor":  "México"
+                                "penaltis_vencedor":  "casa"
                             },
                      "93":  {
                                 "gols_casa":  2,
@@ -397,7 +397,7 @@
                      "94":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Estados Unidos"
+                                "penaltis_vencedor":  "casa"
                             },
                      "95":  {
                                 "gols_casa":  2,

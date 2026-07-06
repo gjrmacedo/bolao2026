@@ -367,7 +367,7 @@
                      "88":  {
                                 "gols_casa":  0,
                                 "gols_fora":  0,
-                                "penaltis_vencedor":  "Egito"
+                                "penaltis_vencedor":  "fora"
                             },
                      "89":  {
                                 "gols_casa":  2,
@@ -392,7 +392,7 @@
                      "93":  {
                                 "gols_casa":  2,
                                 "gols_fora":  2,
-                                "penaltis_vencedor":  "Portugal"
+                                "penaltis_vencedor":  "casa"
                             },
                      "94":  {
                                 "gols_casa":  1,

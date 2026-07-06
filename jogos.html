@@ -309,7 +309,7 @@ function abrirPalpites(jogoId) {
       html += `<div class="modal-palpite-row"><span class="modal-nome">${p.nome}</span>`;
       if (palpite !== undefined) {
         const penPalpite = palpite.penaltis_vencedor
-          ? ` <small style="color:var(--muted)">*${palpite.penaltis_vencedor}</small>`
+          ? ` <small style="color:var(--muted)">*${palpite.penaltis_vencedor === 'casa' ? casa : fora}</small>`
           : '';
         html += `<span class="modal-bet">${palpite.gols_casa} – ${palpite.gols_fora}${penPalpite}</span>`;
         if (detalhe) {

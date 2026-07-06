@@ -342,7 +342,7 @@
                      "83":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Portugal"
+                                "penaltis_vencedor":  "casa"
                             },
                      "84":  {
                                 "gols_casa":  2,
@@ -367,7 +367,7 @@
                      "88":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Austrália"
+                                "penaltis_vencedor":  "casa"
                             },
                      "89":  {
                                 "gols_casa":  1,
@@ -397,7 +397,7 @@
                      "94":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Bélgica"
+                                "penaltis_vencedor":  "fora"
                             },
                      "95":  {
                                 "gols_casa":  2,

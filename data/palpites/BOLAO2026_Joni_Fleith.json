@@ -292,7 +292,7 @@
                      "73":  {
                                 "gols_casa":  2,
                                 "gols_fora":  2,
-                                "penaltis_vencedor":  "Canadá"
+                                "penaltis_vencedor":  "fora"
                             },
                      "74":  {
                                 "gols_casa":  3,
@@ -387,12 +387,12 @@
                      "92":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Inglaterra"
+                                "penaltis_vencedor":  "fora"
                             },
                      "93":  {
                                 "gols_casa":  1,
                                 "gols_fora":  1,
-                                "penaltis_vencedor":  "Espanha"
+                                "penaltis_vencedor":  "fora"
                             },
                      "94":  {
                                 "gols_casa":  2,
