@@ -196,8 +196,8 @@
     {"id": 98,  "fase": "quartas", "data": "2026-07-10T16:00:00-03:00", "casa": "Espanha", "fora": "Bélgica", "sede": "Los Angeles",       "duplicado": false},
     {"id": 99,  "fase": "quartas", "data": "2026-07-11T18:00:00-03:00", "casa": "Noruega", "fora": "Inglaterra", "sede": "Miami",             "duplicado": false},
     {"id": 100, "fase": "quartas", "data": "2026-07-11T21:00:00-03:00", "casa": "Argentina", "fora": "Suíça", "sede": "Kansas City",       "duplicado": false},
-    {"id": 101, "fase": "semi",    "data": "2026-07-14T16:00:00-03:00", "casa": "V97", "fora": "V98", "sede": "Dallas",            "duplicado": false},
-    {"id": 102, "fase": "semi",    "data": "2026-07-15T16:00:00-03:00", "casa": "V99", "fora": "V100","sede": "Atlanta",            "duplicado": false},
+    {"id": 101, "fase": "semi",    "data": "2026-07-14T16:00:00-03:00", "casa": "França", "fora": "Espanha", "sede": "Dallas",            "duplicado": false},
+    {"id": 102, "fase": "semi",    "data": "2026-07-15T16:00:00-03:00", "casa": "Inglaterra", "fora": "Argentina","sede": "Atlanta",            "duplicado": false},
     {"id": 103, "fase": "terceiro","data": "2026-07-18T18:00:00-03:00", "casa": "Perdedor 101","fora": "Perdedor 102","sede": "Miami","duplicado": false},
     {"id": 104, "fase": "final",   "data": "2026-07-19T16:00:00-03:00", "casa": "V101","fora": "V102","sede": "Nova York",          "duplicado": false}
   ],
