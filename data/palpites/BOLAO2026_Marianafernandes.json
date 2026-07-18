@@ -438,6 +438,16 @@
                                  "gols_casa":  2,
                                  "gols_fora":  2,
                                  "penaltis_vencedor":  "fora"
+                             },
+                     "103":  {
+                                 "gols_casa":  2,
+                                 "gols_fora":  2,
+                                 "penaltis_vencedor":  "casa"
+                             },
+                     "104":  {
+                                 "gols_casa":  1,
+                                 "gols_fora":  1,
+                                 "penaltis_vencedor":  "fora"
                              }
                  },
     "extras":  {
